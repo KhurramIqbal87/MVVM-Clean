@@ -12,8 +12,9 @@ protocol Coordinator: AnyObject{
     var childCordinators: [Coordinator]{get}
 }
 
-final class AppCoordinator:Coordinator{
+final class AppCoordinator: Coordinator{
     private var window: UIWindow
+   
     init(window: UIWindow){
         self.window = window
     }
@@ -24,15 +25,10 @@ final class AppCoordinator:Coordinator{
         window.rootViewController = nvController
         nvController.setViewControllers([loginViewController], animated: true)
         window.makeKeyAndVisible()
-        
-        
-        
+       
     }
     
  private(set) var childCordinators: [Coordinator] = []
-    
-
-    
     
 }
 
