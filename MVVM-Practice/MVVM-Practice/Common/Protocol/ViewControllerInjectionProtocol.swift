@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ViewControllerProtocol{
+protocol ViewControllerInjectionProtocol{
     func injectDependency(_ resolver: Resolver)
 }
 protocol ViewControllerDismiss {

@@ -57,9 +57,7 @@ class AppContainer{
      func getLoginViewModel()->LoginViewModelProtocol?{
         return try? self.resolver?.resolve(type: LoginViewModelProtocol.self)
     }
-    deinit {
-       print( "App Container deinit")
-    }
+   
 }
 
 

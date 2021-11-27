@@ -34,7 +34,7 @@
 		D5E239482744C7BD00D5AFE5 /* Array+Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E239472744C7BD00D5AFE5 /* Array+Resolver.swift */; };
 		D5E2394A2744C7FB00D5AFE5 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E239492744C7FB00D5AFE5 /* AppContainer.swift */; };
 		D5E2394D2745529E00D5AFE5 /* StoryboardInstantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E2394C2745529E00D5AFE5 /* StoryboardInstantiate.swift */; };
-		D5E2394F2745573C00D5AFE5 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E2394E2745573C00D5AFE5 /* ViewControllerProtocol.swift */; };
+		D5E2394F2745573C00D5AFE5 /* ViewControllerInjectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E2394E2745573C00D5AFE5 /* ViewControllerInjectionProtocol.swift */; };
 		D5E23955274696AB00D5AFE5 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E23954274696AA00D5AFE5 /* Coordinator.swift */; };
 		D5E2396B2749098800D5AFE5 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E2396A2749098700D5AFE5 /* HttpMethod.swift */; };
 		D5E2396E27490CE200D5AFE5 /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E2396D27490CE200D5AFE5 /* NetworkProtocol.swift */; };
@@ -80,7 +80,7 @@
 		D5E239472744C7BD00D5AFE5 /* Array+Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Resolver.swift"; sourceTree = "<group>"; };
 		D5E239492744C7FB00D5AFE5 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		D5E2394C2745529E00D5AFE5 /* StoryboardInstantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiate.swift; sourceTree = "<group>"; };
-		D5E2394E2745573C00D5AFE5 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		D5E2394E2745573C00D5AFE5 /* ViewControllerInjectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerInjectionProtocol.swift; sourceTree = "<group>"; };
 		D5E23954274696AA00D5AFE5 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D5E2396A2749098700D5AFE5 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		D5E2396D27490CE200D5AFE5 /* NetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 				D5DC66582736B09C001C9A59 /* LoginViewModelProtocol.swift */,
 				D5DC665A2736B186001C9A59 /* UserModelProtocol.swift */,
 				D5DC665C2736B4F3001C9A59 /* LoginRepositoryProtocol.swift */,
-				D5E2394E2745573C00D5AFE5 /* ViewControllerProtocol.swift */,
+				D5E2394E2745573C00D5AFE5 /* ViewControllerInjectionProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 				D514AD76275239C6004F5F5D /* SplashCoordinator.swift in Sources */,
 				D5BDC4C527290E0A0094E9C4 /* AppDelegate.swift in Sources */,
 				D5BDC4E7272913A20094E9C4 /* NetworkManager.swift in Sources */,
-				D5E2394F2745573C00D5AFE5 /* ViewControllerProtocol.swift in Sources */,
+				D5E2394F2745573C00D5AFE5 /* ViewControllerInjectionProtocol.swift in Sources */,
 				D570830A2752422400788F32 /* AppCoordinator.swift in Sources */,
 				D5BDC4E4272911790094E9C4 /* LoginValidation.swift in Sources */,
 				D5FEA6B427421FC400293ADE /* BasicServiceFactory.swift in Sources */,

@@ -30,7 +30,7 @@ extension StoryboardInstantiate where Self: UIViewController{
             fatalError("Cannot instantiate initial view controller \(Self.self) from storyboard with name \(defaultStoryboardName)")
             
         }
-        if let pr = vc as? ViewControllerProtocol, let resolver = resolver{
+        if let pr = vc as? ViewControllerInjectionProtocol, let resolver = resolver{
             pr.injectDependency(resolver)
         }
         

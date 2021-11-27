@@ -88,10 +88,7 @@ public class DefaultLoginViewModel: LoginViewModelProtocol {
     func viewDidLoad() {
         
     }
-    deinit {
-        
-        print("deinit loginviewModel")
-    }
+    
     
 }
 

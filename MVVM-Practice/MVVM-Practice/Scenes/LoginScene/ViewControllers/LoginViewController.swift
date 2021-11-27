@@ -13,15 +13,6 @@ final class LoginViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     private var loginViewModel: LoginViewModelProtocol?
     
-    init(loginViewModel: LoginViewModelProtocol){
-        
-        self.loginViewModel = loginViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,17 +36,14 @@ final class LoginViewController: UIViewController {
         self.loginViewModel?.setLoginCompletion(loginCompletion: (success, failure))
     }
     
-
-    
     @IBAction func login(_ sender: Any){
         self.loginViewModel?.login(userName: self.userName.text ?? "", password: self.password.text ?? "")
     }
-    deinit {
-        print("LoginViewController Dismiss")
-    }
+   
 }
 
-extension LoginViewController: ViewControllerProtocol{
+extension LoginViewController: ViewControllerInjectionProtocol{
+    
     func injectDependency(_ resolver: Resolver) {
         do {
         self.loginViewModel = try resolver.resolve(type: LoginViewModelProtocol.self)

@@ -37,9 +37,7 @@ final class LoginCoordinator: Coordinator{
     func childDidFinish() {
         self.parentCoordinator?.childDidFinish(coordinator: self)
     }
-    deinit {
-        print("Deinit LoginCoordinator")
-    }
+   
 }
 
 
