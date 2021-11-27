@@ -7,17 +7,12 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController {
+final class SplashViewController: UIViewController {
     
-    @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var password: UITextField!
-    private var loginViewModel: LoginViewModelProtocol?
     
-    init(loginViewModel: LoginViewModelProtocol){
-        
-        self.loginViewModel = loginViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
+    private var splashViewModel: SplashViewModel?
+    
+   
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -25,46 +20,28 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
-        
+    }
+    func setViewModel(splashViewModel: SplashViewModel){
+        self.splashViewModel = splashViewModel
+        self.title = SplashViewModel.title
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.loginViewModel?.viewWillDisAppear()
+     
     }
-    
-    private func setup(){
-    
-        let success:Success = {[weak self]  (success) in
-            self?.dismiss(animated: true, completion: nil)
-            
-        }
-        let failure:Failure = { (error) in
-            print("failure: \(error)")
-        }
-        self.loginViewModel?.setLoginCompletion(loginCompletion: (success, failure))
-    }
-    
 
     
-    @IBAction func login(_ sender: Any){
-        self.loginViewModel?.login(userName: self.userName.text ?? "", password: self.password.text ?? "")
+    @IBAction func navigateToLogin(_ sender: Any){
+        self.splashViewModel?.navigateToLoginController()
     }
+    
+    
 
 }
 
-extension LoginViewController: ViewControllerProtocol{
-    func injectDependency(_ resolver: Resolver) {
-        do {
-        self.loginViewModel = try resolver.resolve(type: LoginViewModelProtocol.self)
-            
-        } catch let error{
-            print(error)
-        }
-    }
-}
 
-extension LoginViewController: StoryboardInstantiate{}
+
+extension SplashViewController: StoryboardInstantiate{}
 //class a calls class b func
 //
 //class b will update class A on completion

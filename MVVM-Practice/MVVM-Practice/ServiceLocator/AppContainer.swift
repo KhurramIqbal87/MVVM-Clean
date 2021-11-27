@@ -13,11 +13,13 @@ class AppContainer{
         return Container.init()
     }()
     
-    func makeLoginViewController()->UIViewController {
+    func makeLoginViewController(coordinator: LoginCoordinator)->UIViewController {
         
         self.makeLoginViewModel()
         
-        
+        resolver = resolver.register(Coordinator.self, { _ in
+            return coordinator
+        })
         let viewController:LoginViewController = LoginViewController.instantiate(nil, resolver: resolver)
         
         return viewController
@@ -25,7 +27,7 @@ class AppContainer{
         
     }
     
-    func makeLoginViewModel(){
+    private func makeLoginViewModel(){
         
         self.makeLoginRepository()
         resolver =  self.resolver.register(LoginViewModelProtocol.self) { resolver in
@@ -33,7 +35,7 @@ class AppContainer{
         }
     }
     
-    func makeLoginRepository(){
+     private func makeLoginRepository(){
         self.makeNetworkManager()
         resolver = self.resolver.register(LoginRepositoryProtocol.self) { resolver in
             return DefaultLoginRepository.init(networkManager: try! self.resolver.resolve(type: NetworkProtocol.self))
@@ -41,13 +43,16 @@ class AppContainer{
         
     }
     
-    func makeNetworkManager(){
+    private  func makeNetworkManager(){
         resolver =  self.resolver.register(interface: NetworkProtocol.self, instance: NetworkManager.sharedInstance)
         
     }
     
-    func makeDatabaseManager(){
+   private func makeDatabaseManager(){
         
+    }
+     func getLoginViewModel()->LoginViewModelProtocol?{
+        return try? self.resolver.resolve(type: LoginViewModelProtocol.self)
     }
 }
 

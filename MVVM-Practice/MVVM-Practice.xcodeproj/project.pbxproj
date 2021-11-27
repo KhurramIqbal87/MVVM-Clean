@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D514AD7427523971004F5F5D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD7327523971004F5F5D /* LoginCoordinator.swift */; };
+		D514AD76275239C6004F5F5D /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD75275239C6004F5F5D /* SplashCoordinator.swift */; };
 		D52A2F322732491600A930C7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A2F312732491600A930C7 /* UserModel.swift */; };
 		D52A2F3427324A5300A930C7 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A2F3327324A5300A930C7 /* LoginViewModel.swift */; };
+		D570830727523B7800788F32 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D570830627523B7800788F32 /* SplashViewModel.swift */; };
+		D570830827523C9300788F32 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD7927523A3D004F5F5D /* SplashViewController.swift */; };
+		D570830A2752422400788F32 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57083092752422400788F32 /* AppCoordinator.swift */; };
+		D570830B27524CF900788F32 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D570830227523A9E00788F32 /* SplashViewController.storyboard */; };
 		D57401032732BFE000558B44 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57401022732BFE000558B44 /* LoginRepository.swift */; };
 		D5BDC4C527290E0A0094E9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDC4C427290E0A0094E9C4 /* AppDelegate.swift */; };
 		D5BDC4C727290E0A0094E9C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDC4C627290E0A0094E9C4 /* SceneDelegate.swift */; };
@@ -45,8 +51,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D514AD7327523971004F5F5D /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		D514AD75275239C6004F5F5D /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		D514AD7927523A3D004F5F5D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D52A2F312732491600A930C7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D52A2F3327324A5300A930C7 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		D570830327523A9E00788F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SplashViewController.storyboard; sourceTree = "<group>"; };
+		D570830627523B7800788F32 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		D57083092752422400788F32 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D57401022732BFE000558B44 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		D5BDC4C127290E0A0094E9C4 /* MVVM-Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVVM-Practice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BDC4C427290E0A0094E9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +107,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D514AD7727523A29004F5F5D /* SplashScene */ = {
+			isa = PBXGroup;
+			children = (
+				D570830427523B5600788F32 /* ViewModel */,
+				D514AD7827523A34004F5F5D /* ViewController */,
+			);
+			path = SplashScene;
+			sourceTree = "<group>";
+		};
+		D514AD7827523A34004F5F5D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D570830227523A9E00788F32 /* SplashViewController.storyboard */,
+				D514AD7927523A3D004F5F5D /* SplashViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D570830427523B5600788F32 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D570830627523B7800788F32 /* SplashViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		D570A875274257A3008A90D6 /* ServiceFactory */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +305,7 @@
 		D5DC665E2736B576001C9A59 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D514AD7727523A29004F5F5D /* SplashScene */,
 				D5BDC4D827290E250094E9C4 /* LoginScene */,
 			);
 			path = Scenes;
@@ -284,6 +323,9 @@
 		D5E239532746967F00D5AFE5 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				D514AD75275239C6004F5F5D /* SplashCoordinator.swift */,
+				D514AD7327523971004F5F5D /* LoginCoordinator.swift */,
+				D57083092752422400788F32 /* AppCoordinator.swift */,
 				D5E23954274696AA00D5AFE5 /* Coordinator.swift */,
 			);
 			path = Coordinator;
@@ -363,6 +405,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D570830B27524CF900788F32 /* SplashViewController.storyboard in Resources */,
 				D5BDC4D127290E0D0094E9C4 /* LaunchScreen.storyboard in Resources */,
 				D5BDC4CE27290E0D0094E9C4 /* Assets.xcassets in Resources */,
 				D5BDC4CC27290E0A0094E9C4 /* LoginViewController.storyboard in Resources */,
@@ -379,12 +422,15 @@
 				D5FEA6B227421F6600293ADE /* Resolver.swift in Sources */,
 				D5BDC4C927290E0A0094E9C4 /* LoginViewController.swift in Sources */,
 				D5E2394D2745529E00D5AFE5 /* StoryboardInstantiate.swift in Sources */,
+				D570830827523C9300788F32 /* SplashViewController.swift in Sources */,
 				D5DC66602737CBE4001C9A59 /* DICProtocol.swift in Sources */,
 				D5E239482744C7BD00D5AFE5 /* Array+Resolver.swift in Sources */,
+				D514AD7427523971004F5F5D /* LoginCoordinator.swift in Sources */,
 				D5FEA6B82742262800293ADE /* AnyServiceFactory.swift in Sources */,
 				D5E2396E27490CE200D5AFE5 /* NetworkProtocol.swift in Sources */,
 				D5DB85E62733A13C006B2A25 /* Error.swift in Sources */,
 				D57401032732BFE000558B44 /* LoginRepository.swift in Sources */,
+				D570830727523B7800788F32 /* SplashViewModel.swift in Sources */,
 				D5E23955274696AB00D5AFE5 /* Coordinator.swift in Sources */,
 				D5DC665D2736B4F3001C9A59 /* LoginRepositoryProtocol.swift in Sources */,
 				D5E2396B2749098800D5AFE5 /* HttpMethod.swift in Sources */,
@@ -395,9 +441,11 @@
 				D5DC665B2736B186001C9A59 /* UserModelProtocol.swift in Sources */,
 				D5E239722749107C00D5AFE5 /* Reachability.swift in Sources */,
 				D5FEA6B62742209600293ADE /* ServiceFactory.swift in Sources */,
+				D514AD76275239C6004F5F5D /* SplashCoordinator.swift in Sources */,
 				D5BDC4C527290E0A0094E9C4 /* AppDelegate.swift in Sources */,
 				D5BDC4E7272913A20094E9C4 /* NetworkManager.swift in Sources */,
 				D5E2394F2745573C00D5AFE5 /* ViewControllerProtocol.swift in Sources */,
+				D570830A2752422400788F32 /* AppCoordinator.swift in Sources */,
 				D5BDC4E4272911790094E9C4 /* LoginValidation.swift in Sources */,
 				D5FEA6B427421FC400293ADE /* BasicServiceFactory.swift in Sources */,
 				D5E239462744C77000D5AFE5 /* Collection+FirstToResolve.swift in Sources */,
@@ -414,6 +462,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D570830227523A9E00788F32 /* SplashViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D570830327523A9E00788F32 /* Base */,
+			);
+			name = SplashViewController.storyboard;
+			sourceTree = "<group>";
+		};
 		D5BDC4CA27290E0A0094E9C4 /* LoginViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -555,7 +611,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "MVVM-Practice/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MVVM-Practice/Core/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -573,7 +629,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "MVVM-Practice/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MVVM-Practice/Core/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,29 +8,21 @@
 import UIKit
 
 protocol Coordinator: AnyObject{
-    func start()
+    
     var childCordinators: [Coordinator]{get}
+    func start()
+    func childDidFinish(coordinator: Coordinator)
+    
+}
+extension Coordinator{
+
+    func childDidFinish(coordinator: Coordinator){
+        print("didFinish Call")
+    }
 }
 
-final class AppCoordinator: Coordinator{
-    private var window: UIWindow
-   
-    init(window: UIWindow){
-        self.window = window
-    }
-    func start() {
-        let nvController = UINavigationController.init()
-        let container = AppContainer.init()
-        let loginViewController = container.makeLoginViewController()
-        window.rootViewController = nvController
-        nvController.setViewControllers([loginViewController], animated: true)
-        window.makeKeyAndVisible()
-       
-    }
-    
- private(set) var childCordinators: [Coordinator] = []
-    
-}
+
+
 
 
 

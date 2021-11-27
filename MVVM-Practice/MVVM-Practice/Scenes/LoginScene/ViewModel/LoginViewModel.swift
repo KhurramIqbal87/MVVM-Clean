@@ -15,25 +15,28 @@ typealias Failure = ((_ error: String)->Void)
 
 
 public class DefaultLoginViewModel: LoginViewModelProtocol {
-    
+
+    private var coordinator: Coordinator?
+    private var repository: LoginRepositoryProtocol?
+    var userViewModel: UserViewModelProtocol?
     var didFinishLogin: (success: Success, error:  Failure)?
-    
+
     private init(){
         
     }
-    
-    init( repository: LoginRepositoryProtocol ){
+
+    init( repository: LoginRepositoryProtocol  ){
         self.repository = repository
+    }
+    
+    func setCoordinator(coordinator: Coordinator){
+        self.coordinator = coordinator
     }
     
     func setLoginCompletion(loginCompletion:  (success:Success, error: Failure)){
         self.didFinishLogin = loginCompletion
     }
     
-   private var repository: LoginRepositoryProtocol?
-    
-    var userViewModel: UserViewModelProtocol?
-   
     
     func login(userName: String, password: String) {
         
@@ -67,13 +70,29 @@ public class DefaultLoginViewModel: LoginViewModelProtocol {
             
         })
     }
-    func showNetworkError(statusCode: HTTPStatusCode) -> String{
+    
+    private func showNetworkError(statusCode: HTTPStatusCode) -> String{
         
         switch statusCode{
         default: return HTTPStatusCodeHelper.codeDescription(statusCode: statusCode)
             
         }
     }
+    
+    func viewWillDisAppear() {
+        if let coordinator = self.coordinator as? LoginCoordinator{
+            coordinator.childDidFinish()
+        }
+    }
+    
+    func viewDidLoad() {
+        
+    }
+    deinit {
+        
+        print(self.coordinator ?? "No Reference")
+    }
+    
 }
 
 

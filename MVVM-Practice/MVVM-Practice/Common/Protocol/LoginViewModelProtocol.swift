@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LoginViewModelProtocol{
+protocol LoginViewModelProtocol: ViewControllerDismiss, ViewControllerInitialize{
     
    
     var userViewModel: UserViewModelProtocol? { get}
@@ -17,5 +17,6 @@ protocol LoginViewModelProtocol{
     func setLoginCompletion(loginCompletion:  (success:Success, error: Failure))
 
     func login(userName: String, password: String)
+    
     
 }

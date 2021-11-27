@@ -9,11 +9,9 @@ import UIKit
 
 
 
-
-
-final class AppCoordinator: Coordinator{
+final class LoginCoordinator: Coordinator{
     
-    private var parentCoordinator: Coordinator
+    private weak var parentCoordinator: Coordinator?
     private var navigationController: UINavigationController
     private(set) var childCordinators: [Coordinator] = []
     
@@ -27,19 +25,20 @@ final class AppCoordinator: Coordinator{
     }
     
     func start() {
- 
-        let loginViewController = container.makeLoginViewController()
-        
+ // objectNo 1
+        let loginViewController = container.makeLoginViewController(coordinator: self)
+    
         if let viewModel = container.getLoginViewModel() as? DefaultLoginViewModel{
             viewModel.setCoordinator(coordinator: self)
         }
 
+//        self.navigationController.setViewControllers([loginViewController], animated: true)
         self.navigationController.pushViewController(loginViewController, animated: true)
     
     }
     
-    func viewWillDisAppear() {
-        self.parentCoordinator.viewWillDisAppear()
+    func childDidFinish() {
+        self.parentCoordinator?.childDidFinish(coordinator: self)
     }
 }
 

@@ -10,3 +10,10 @@ import Foundation
 protocol ViewControllerProtocol{
     func injectDependency(_ resolver: Resolver)
 }
+protocol ViewControllerDismiss {
+    func viewWillDisAppear()
+}
+protocol ViewControllerInitialize{
+    func viewDidLoad()
+    
+}

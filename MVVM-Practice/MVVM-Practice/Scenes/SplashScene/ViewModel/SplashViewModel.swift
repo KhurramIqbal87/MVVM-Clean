@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+final class SplashViewModel{
+    var coordinator: SplashCoordinator?
+    var navigateToLogin: (()->Void)?
+    static let title = "Splash Screen"
+    
+    init(coordinator: SplashCoordinator){
+        self.coordinator = coordinator
+    }
+   
+    
+    func navigateToLoginController(){
+        self.navigateToLogin?()
+    }
+    
+}

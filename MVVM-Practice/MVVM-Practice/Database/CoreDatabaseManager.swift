@@ -50,7 +50,7 @@ extension CoreDatabaseManager{
         
     }
     
-    func fetch<T: NSManagedObject>( query: String?,completion: @escaping((_ results: [T]?)throws ->Void))throws {
+    func fetch<T: NSManagedObject>( query: String?,completion: @escaping((_ results: [T]?) ->Void))throws {
 
         let fetchRequest:NSFetchRequest<T> = self.getFetchRequest()
         
@@ -72,7 +72,8 @@ extension CoreDatabaseManager{
         
     }
     
-    func update<T:NSManagedObject>( query: String, completion: @escaping(( _ managedObject: T?)throws ->Void))  {
+    
+    func update<T:NSManagedObject>( query: String, completion: @escaping(( _ managedObject: T?)->Void))throws  {
         
         let fetchRequest: NSFetchRequest<T> = self.getFetchRequest()
         
@@ -81,9 +82,9 @@ extension CoreDatabaseManager{
         fetchRequest.predicate = predicate
         
         self.performBackgroundTask { context in
-//                try? completion(try? context.fetch(fetchRequest))
+
             let results = try? context.fetch(fetchRequest)
-            try? completion(results?.first)
+            completion(results?.first)
             
         }
     }

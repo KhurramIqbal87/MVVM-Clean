@@ -7,40 +7,38 @@
 
 import UIKit
 
-
-
-
-
-final class AppCoordinator: Coordinator{
+final class SplashCoordinator: Coordinator{
     
     
-    private var window: UIWindow
+    private var navigationController: UINavigationController
     private(set) var childCordinators: [Coordinator] = []
-    
-    lazy private var container: AppContainer = {
-        return AppContainer()
-    }()
-    
-    init(window: UIWindow){
-        self.window = window
+      
+    init(navigationController: UINavigationController){
+        self.navigationController = navigationController
     }
     
     func start() {
-        let nvController = UINavigationController.init()
-        let loginViewController = container.makeLoginViewController()
-        
-        if let viewModel = container.getLoginViewModel() as? DefaultLoginViewModel{
-            viewModel.setCoordinator(coordinator: self)
-        }
-        window.rootViewController = nvController
-        nvController.setViewControllers([loginViewController], animated: true)
-        window.makeKeyAndVisible()
+     
+        let splashViewController: SplashViewController = SplashViewController.instantiate(nil, resolver: nil)
+        let splashViewModel = SplashViewModel.init(coordinator: self)
+     
+        splashViewController.setViewModel(splashViewModel: splashViewModel)
+        splashViewModel.navigateToLogin = self.navigateToLogin
+        navigationController.setViewControllers([splashViewController], animated: true)
     }
     
-    func viewWillDisAppear() {
+    func navigateToLogin(){
+       
+        let loginCoordinator = LoginCoordinator.init(navigationController: self.navigationController, parentCoordinator: self)
+        
+        loginCoordinator.start()
+        self.childCordinators.append(loginCoordinator)
+    }
+    
+    func childDidFinish(coordinator: Coordinator){
+     
+        
+        self.childCordinators.removeAll(where: {$0 === coordinator})
         
     }
 }
-
-
-
