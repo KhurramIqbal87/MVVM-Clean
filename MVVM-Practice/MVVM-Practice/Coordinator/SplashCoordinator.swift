@@ -39,6 +39,11 @@ final class SplashCoordinator: Coordinator{
      
         
         self.childCordinators.removeAll(where: {$0 === coordinator})
+        for cordinator in self.childCordinators{
+           
+            print("Coordinator in Splash",coordinator)
+        }
+      
         
     }
 }

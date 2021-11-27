@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    let appContainer = AppContainer()
+    
     var window: UIWindow?
 
 // Asif please look into this function how coordinator is implemented

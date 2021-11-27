@@ -9,15 +9,15 @@ import Foundation
 
 import UIKit
 class AppContainer{
-    lazy private var resolver: Container = {
-        return Container.init()
-    }()
-    
+     private  var resolver: Container?
+    init() {
+        resolver = Container()
+    }
     func makeLoginViewController(coordinator: LoginCoordinator)->UIViewController {
         
         self.makeLoginViewModel()
         
-        resolver = resolver.register(Coordinator.self, { _ in
+        resolver = resolver?.register(Coordinator.self, { _ in
             return coordinator
         })
         let viewController:LoginViewController = LoginViewController.instantiate(nil, resolver: resolver)
@@ -30,21 +30,24 @@ class AppContainer{
     private func makeLoginViewModel(){
         
         self.makeLoginRepository()
-        resolver =  self.resolver.register(LoginViewModelProtocol.self) { resolver in
-            return DefaultLoginViewModel.init(repository: try! self.resolver.resolve(type: LoginRepositoryProtocol.self))
+        guard let resolver = self.resolver else{return}
+        self.resolver =  resolver.register(LoginViewModelProtocol.self) { resolver in
+            return DefaultLoginViewModel.init(repository: try! resolver.resolve(type: LoginRepositoryProtocol.self))
         }
     }
     
      private func makeLoginRepository(){
         self.makeNetworkManager()
-        resolver = self.resolver.register(LoginRepositoryProtocol.self) { resolver in
-            return DefaultLoginRepository.init(networkManager: try! self.resolver.resolve(type: NetworkProtocol.self))
+        guard let resolver = self.resolver else{return}
+        self.resolver = resolver.register(LoginRepositoryProtocol.self) { resolver in
+            return DefaultLoginRepository.init(networkManager: try! resolver.resolve(type: NetworkProtocol.self))
         }
         
     }
     
     private  func makeNetworkManager(){
-        resolver =  self.resolver.register(interface: NetworkProtocol.self, instance: NetworkManager.sharedInstance)
+        guard let resolver = self.resolver else{return}
+        self.resolver =  resolver.register(interface: NetworkProtocol.self, instance: NetworkManager.sharedInstance)
         
     }
     
@@ -52,7 +55,10 @@ class AppContainer{
         
     }
      func getLoginViewModel()->LoginViewModelProtocol?{
-        return try? self.resolver.resolve(type: LoginViewModelProtocol.self)
+        return try? self.resolver?.resolve(type: LoginViewModelProtocol.self)
+    }
+    deinit {
+       print( "App Container deinit")
     }
 }
 

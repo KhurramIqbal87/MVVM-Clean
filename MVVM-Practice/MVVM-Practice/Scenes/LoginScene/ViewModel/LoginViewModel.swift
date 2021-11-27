@@ -90,7 +90,7 @@ public class DefaultLoginViewModel: LoginViewModelProtocol {
     }
     deinit {
         
-        print(self.coordinator ?? "No Reference")
+        print("deinit loginviewModel")
     }
     
 }
