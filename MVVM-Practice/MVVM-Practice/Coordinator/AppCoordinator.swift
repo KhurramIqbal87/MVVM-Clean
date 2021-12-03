@@ -12,8 +12,6 @@ final class AppCoordinator: Coordinator{
     private var window: UIWindow
     private(set) var childCordinators: [Coordinator] = []
     
-    
-    
     init(window: UIWindow){
         self.window = window
     }
@@ -24,10 +22,11 @@ final class AppCoordinator: Coordinator{
         window.rootViewController = navController
         window.makeKeyAndVisible()
         
-        let splashCoordinator = SplashCoordinator.init(navigationController: navController)
-        splashCoordinator.start()
-        self.childCordinators.append(splashCoordinator)
+        let loginCoordinator = LoginCoordinator.init(navigationController: navController, parentCoordinator: self)
+        loginCoordinator.start()
+        self.childCordinators.append(loginCoordinator)
     }
+    
     
 }
 

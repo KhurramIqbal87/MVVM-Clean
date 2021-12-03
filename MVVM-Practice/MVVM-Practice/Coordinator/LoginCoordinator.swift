@@ -17,6 +17,7 @@ final class LoginCoordinator: Coordinator{
     
     
     
+    
     init(navigationController: UINavigationController, parentCoordinator: Coordinator){
         self.navigationController = navigationController
         self.parentCoordinator = parentCoordinator
@@ -31,7 +32,7 @@ final class LoginCoordinator: Coordinator{
         if let viewModel = container.getLoginViewModel() as? DefaultLoginViewModel{
             viewModel.setCoordinator(coordinator: self)
         }
-        self.navigationController?.pushViewController(loginViewController, animated: true)
+        self.navigationController?.setViewControllers([loginViewController], animated: true)
     }
     
     func childDidFinish() {

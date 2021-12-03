@@ -11,9 +11,6 @@ import Foundation
 typealias Success = ((_ success: String)->Void)
 typealias Failure = ((_ error: String)->Void)
 
-
-
-
 public class DefaultLoginViewModel: LoginViewModelProtocol {
 
     private var coordinator: Coordinator?
@@ -64,7 +61,6 @@ public class DefaultLoginViewModel: LoginViewModelProtocol {
                 case .networkError (let statusCode):
                     self.didFinishLogin?.error(self.showNetworkError(statusCode: statusCode))
                 case .noInternet: self.didFinishLogin?.error("No Internet Connection")
-                    
                 }
             }
             

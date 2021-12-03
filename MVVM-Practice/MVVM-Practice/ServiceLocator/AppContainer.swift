@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 class AppContainer{
-     private  var resolver: Container?
+    private  var resolver: Container?
     init() {
         resolver = Container()
     }

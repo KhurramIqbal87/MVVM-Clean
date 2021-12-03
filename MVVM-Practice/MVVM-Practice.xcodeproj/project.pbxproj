@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D514AD7427523971004F5F5D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD7327523971004F5F5D /* LoginCoordinator.swift */; };
 		D514AD76275239C6004F5F5D /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD75275239C6004F5F5D /* SplashCoordinator.swift */; };
+		D51EB1CB27573F80003A177E /* MVVM_PracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EB1CA27573F80003A177E /* MVVM_PracticeTests.swift */; };
+		D51EB1D427574096003A177E /* MovieListViewModelTdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EB1D327574096003A177E /* MovieListViewModelTdd.swift */; };
 		D52A2F322732491600A930C7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A2F312732491600A930C7 /* UserModel.swift */; };
 		D52A2F3427324A5300A930C7 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A2F3327324A5300A930C7 /* LoginViewModel.swift */; };
 		D570830727523B7800788F32 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D570830627523B7800788F32 /* SplashViewModel.swift */; };
@@ -50,10 +52,24 @@
 		D5FEA6B82742262800293ADE /* AnyServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FEA6B72742262800293ADE /* AnyServiceFactory.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D51EB1CD27573F80003A177E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5BDC4B927290E0A0094E9C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5BDC4C027290E0A0094E9C4;
+			remoteInfo = "MVVM-Practice";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D514AD7327523971004F5F5D /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		D514AD75275239C6004F5F5D /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		D514AD7927523A3D004F5F5D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		D51EB1C827573F80003A177E /* MVVM-PracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MVVM-PracticeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D51EB1CA27573F80003A177E /* MVVM_PracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_PracticeTests.swift; sourceTree = "<group>"; };
+		D51EB1CC27573F80003A177E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D51EB1D327574096003A177E /* MovieListViewModelTdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModelTdd.swift; sourceTree = "<group>"; };
 		D52A2F312732491600A930C7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D52A2F3327324A5300A930C7 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D570830327523A9E00788F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SplashViewController.storyboard; sourceTree = "<group>"; };
@@ -97,6 +113,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D51EB1C527573F80003A177E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5BDC4BE27290E0A0094E9C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,6 +146,16 @@
 				D514AD7927523A3D004F5F5D /* SplashViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D51EB1C927573F80003A177E /* MVVM-PracticeTests */ = {
+			isa = PBXGroup;
+			children = (
+				D51EB1CA27573F80003A177E /* MVVM_PracticeTests.swift */,
+				D51EB1CC27573F80003A177E /* Info.plist */,
+				D51EB1D327574096003A177E /* MovieListViewModelTdd.swift */,
+			);
+			path = "MVVM-PracticeTests";
 			sourceTree = "<group>";
 		};
 		D570830427523B5600788F32 /* ViewModel */ = {
@@ -155,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				D5BDC4C327290E0A0094E9C4 /* MVVM-Practice */,
+				D51EB1C927573F80003A177E /* MVVM-PracticeTests */,
 				D5BDC4C227290E0A0094E9C4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -163,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				D5BDC4C127290E0A0094E9C4 /* MVVM-Practice.app */,
+				D51EB1C827573F80003A177E /* MVVM-PracticeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -351,6 +386,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D51EB1C727573F80003A177E /* MVVM-PracticeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D51EB1D127573F80003A177E /* Build configuration list for PBXNativeTarget "MVVM-PracticeTests" */;
+			buildPhases = (
+				D51EB1C427573F80003A177E /* Sources */,
+				D51EB1C527573F80003A177E /* Frameworks */,
+				D51EB1C627573F80003A177E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D51EB1CE27573F80003A177E /* PBXTargetDependency */,
+			);
+			name = "MVVM-PracticeTests";
+			productName = "MVVM-PracticeTests";
+			productReference = D51EB1C827573F80003A177E /* MVVM-PracticeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D5BDC4C027290E0A0094E9C4 /* MVVM-Practice */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5BDC4D527290E0D0094E9C4 /* Build configuration list for PBXNativeTarget "MVVM-Practice" */;
@@ -377,6 +430,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					D51EB1C727573F80003A177E = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = D5BDC4C027290E0A0094E9C4;
+					};
 					D5BDC4C027290E0A0094E9C4 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -396,11 +453,19 @@
 			projectRoot = "";
 			targets = (
 				D5BDC4C027290E0A0094E9C4 /* MVVM-Practice */,
+				D51EB1C727573F80003A177E /* MVVM-PracticeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D51EB1C627573F80003A177E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5BDC4BF27290E0A0094E9C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,6 +480,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D51EB1C427573F80003A177E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D51EB1D427574096003A177E /* MovieListViewModelTdd.swift in Sources */,
+				D51EB1CB27573F80003A177E /* MVVM_PracticeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5BDC4BD27290E0A0094E9C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -461,6 +535,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D51EB1CE27573F80003A177E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5BDC4C027290E0A0094E9C4 /* MVVM-Practice */;
+			targetProxy = D51EB1CD27573F80003A177E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		D570830227523A9E00788F32 /* SplashViewController.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -489,6 +571,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D51EB1CF27573F80003A177E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "MVVM-PracticeTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "test.MVVM-PracticeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVVM-Practice.app/MVVM-Practice";
+			};
+			name = Debug;
+		};
+		D51EB1D027573F80003A177E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "MVVM-PracticeTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "test.MVVM-PracticeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVVM-Practice.app/MVVM-Practice";
+			};
+			name = Release;
+		};
 		D5BDC4D327290E0D0094E9C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -644,6 +764,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D51EB1D127573F80003A177E /* Build configuration list for PBXNativeTarget "MVVM-PracticeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D51EB1CF27573F80003A177E /* Debug */,
+				D51EB1D027573F80003A177E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D5BDC4BC27290E0A0094E9C4 /* Build configuration list for PBXProject "MVVM-Practice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
