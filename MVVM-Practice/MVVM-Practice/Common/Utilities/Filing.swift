@@ -15,8 +15,11 @@ final class Filing: NSObject{
     }
     func saveFile(data: Data, fileName: String, fileExtension: String){
         
-         self.save(data: data, toDirectory: "images", withFileName: fileName + fileExtension)
+        self.save(data: data, toDirectory: self.documentDirectory(), withFileName: "images/" + fileName + fileExtension)
     }
+    
+   
+    
      func getFile(fileName: String)->Data?{
         
          let filePath = "images/" + fileName
