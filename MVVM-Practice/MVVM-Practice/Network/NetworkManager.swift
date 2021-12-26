@@ -12,6 +12,8 @@ typealias NetworkProtocol = NetworkRequestProtocol & NetworkErrorProtocol
 
 final class NetworkManager: NetworkProtocol{
     
+    
+    
     var type: NetworkError?
     var message: String?
     
@@ -30,6 +32,9 @@ final class NetworkManager: NetworkProtocol{
         self.session.dataTask(with: urlRequest) {  data, response, error in
         }
     }
+    
+
+    
     
     private func getURLRequest(path: String, headers: Header?, paramaters: Parameter? )->URLRequest?{
         
@@ -82,6 +87,14 @@ final class NetworkManager: NetworkProtocol{
                     }
                 }
             }.resume()
+        }
+    }
+    
+    func downloadData(url: String, completion:@escaping ((Data?) -> Void)) {
+        
+        guard let url = URL(string: url) else{return}
+        self.session.dataTask(with: url) { data, _, error in
+            completion(data)
         }
     }
     

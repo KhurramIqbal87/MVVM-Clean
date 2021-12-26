@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "30d426ea-fb34-40ab-a940-1e903bcaaec5",
+		"name": "TMDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DiscoverMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "SIGN-UP-FOR-KEY",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authorization",
+						"value": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "useQueryString",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/discover/movie?api_key=2d1cb88f5b3634abdb5496b940599634&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"discover",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "2d1cb88f5b3634abdb5496b940599634"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MovieList",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "SIGN-UP-FOR-KEY",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authorization",
+						"value": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "useQueryString",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/discover/movie?api_key=2d1cb88f5b3634abdb5496b940599634",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"discover",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "2d1cb88f5b3634abdb5496b940599634"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MovieDetail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "SIGN-UP-FOR-KEY",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authorization",
+						"value": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "useQueryString",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/534549?api_key=2d1cb88f5b3634abdb5496b940599634",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"534549"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "2d1cb88f5b3634abdb5496b940599634"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genre",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"type": "text",
+						"value": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
+						"disabled": true
+					},
+					{
+						"key": "x-rapidapi-key",
+						"type": "text",
+						"value": "SIGN-UP-FOR-KEY",
+						"disabled": true
+					},
+					{
+						"key": "authorization",
+						"type": "text",
+						"value": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
+						"disabled": true
+					},
+					{
+						"key": "useQueryString",
+						"type": "text",
+						"value": "true",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/genre/movie/list?api_key=2d1cb88f5b3634abdb5496b940599634",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"genre",
+						"movie",
+						"list"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "2d1cb88f5b3634abdb5496b940599634"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MovieCredit",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-rapidapi-host",
+						"value": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-rapidapi-key",
+						"value": "SIGN-UP-FOR-KEY",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authorization",
+						"value": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "useQueryString",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/534549/credits?api_key=2d1cb88f5b3634abdb5496b940599634",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"534549",
+						"credits"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "2d1cb88f5b3634abdb5496b940599634"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

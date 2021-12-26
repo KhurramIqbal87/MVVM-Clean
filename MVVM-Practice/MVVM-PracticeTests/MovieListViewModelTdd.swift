@@ -18,8 +18,7 @@ class MovieListViewModelTDD: XCTestCase{
     override func setUpWithError() throws {
         
     }
-    
-    
+   
     
     func testPerformace(){
         measure {
@@ -30,7 +29,7 @@ class MovieListViewModelTDD: XCTestCase{
     func test_viewDidLoad_loadInitialData(){
         let viewModel = DIMockContainer().resolve(MovieViewModel.self)
         viewModel.viewDidLoad()
-        viewModel.update = { movieItemListViewModel in
+        viewModel.didLoad = { movieItemListViewModel in
             XCTAssertTrue(viewModel.items.count == movieItemListViewModel.count )
         }
     }
