@@ -6,9 +6,8 @@
 //
 
 import Foundation
-protocol MovieListViewModelProtocol{
+protocol MovieListViewModelProtocol: ViewLifeCycleProtocol{
     //MARK: - MovieListViewModelInput
-    func viewDidLoad()
     func didSelectMovieItem(indexPath: IndexPath)
     func getItemsForNextPage()
     

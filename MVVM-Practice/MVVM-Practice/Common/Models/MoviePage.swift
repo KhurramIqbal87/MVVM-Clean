@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoviePage: Codable{
+struct MoviePage: Decodable{
     var currentPage: Int
     var totalPage: Int
     var movies: [Movie]

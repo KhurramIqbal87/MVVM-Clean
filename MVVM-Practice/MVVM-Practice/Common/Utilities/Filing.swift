@@ -18,7 +18,6 @@ final class Filing: NSObject{
         self.save(data: data, toDirectory: self.documentDirectory(), withFileName: "images/" + fileName + fileExtension)
     }
     
-   
     
      func getFile(fileName: String)->Data?{
         

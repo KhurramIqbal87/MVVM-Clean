@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieItemListViewModelProtocol{
-    
+    var cellReusableIdentifier: String{get}
     var title: String?{get}
     var rating: Double?{get}
     var releaseDate: String {get}

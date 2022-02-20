@@ -12,8 +12,6 @@ typealias NetworkProtocol = NetworkRequestProtocol & NetworkErrorProtocol
 
 final class NetworkManager: NetworkProtocol{
     
-    
-    
     var type: NetworkError?
     var message: String?
     
@@ -33,9 +31,6 @@ final class NetworkManager: NetworkProtocol{
         }
     }
     
-
-    
-    
     private func getURLRequest(path: String, headers: Header?, paramaters: Parameter? )->URLRequest?{
         
        
@@ -51,7 +46,7 @@ final class NetworkManager: NetworkProtocol{
         
     }
     
-    func makeHTTPRequest<RequestModel: Encodable, ResponseModel: Decodable>(httpMethod: HTTPMethod, endPoint: String, parameters: RequestModel? = nil, completionBlock completion: @escaping(Bool, NetworkError?, ResponseModel?)->()) {
+    func makeHTTPRequest< ResponseModel: Decodable>(httpMethod: HTTPMethod, endPoint: String, parameters: Encodable? = DummyRequestModel() , completionBlock completion: @escaping(Bool, NetworkError?, ResponseModel?)->()) {
         
         if !Reachability.isConnectedToNetwork(){
             completion(false,NetworkError.noInternet, nil)
@@ -83,18 +78,23 @@ final class NetworkManager: NetworkProtocol{
                         let networkError = NetworkError.networkError(error: errorCode!)
                         print("API status code error = \(errorCode!.rawValue)")
                         completion(false, networkError, nil)
-                        
                     }
                 }
             }.resume()
         }
     }
     
-    func downloadData(url: String, completion:@escaping ((Data?) -> Void)) {
-        
+    func downloadData(url: String, completion:@escaping ((_ data: Data?, _ error: Error?) -> Void)) {
+        if let saveData = Filing.sharedInstance.getFile(fileName: url){
+            completion(saveData,nil)
+        }
         guard let url = URL(string: url) else{return}
         self.session.dataTask(with: url) { data, _, error in
-            completion(data)
+            
+            if let data = data{
+                Filing.sharedInstance.saveFile(data: data, fileName: url.absoluteString, fileExtension: ".jpeg")
+            }
+            completion(data,error)
         }
     }
     

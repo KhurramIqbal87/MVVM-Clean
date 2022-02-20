@@ -18,6 +18,7 @@ static let addComponent = "/"
 static let MOVIE_DETAILS = ""
 static let QUERY_APIKEY = "?api_key=\(apiKey)"
 static let GENRE = "/genre"
+static let creditDetails = "/credits"
 
 //static let VALID_EXPECTED_PATH = "/3/discover/movie?api_key="
 static let QUERY_PAGE = "&page="
