@@ -10,14 +10,19 @@ import Foundation
 protocol PosterImageRepositoryProtocol{
     func getImage(relativePath: String, completion:@escaping (_ imageData: Data?)->Void)
 }
-
-class PosterImageRepository: PosterImageRepositoryProtocol{
-    private let networkSharedInstance = NetworkManager.sharedInstance
-   
-    func getImage(relativePath: String, completion: @escaping (Data?) -> Void) {
-        
+extension PosterImageRepositoryProtocol{
+    func getImage(relativePath: String, completion:@escaping (_ imageData: Data?)->Void){
+        let networkSharedInstance = NetworkManager.sharedInstance
         let url = MovieConstants.IMAGES_URL  + relativePath
-        networkSharedInstance
+        networkSharedInstance.downloadData(url: url) { data, error in
+            
+            completion(data)
+        }
     }
+}
+
+final class PosterImageRepository: PosterImageRepositoryProtocol{
     
 }
+
+

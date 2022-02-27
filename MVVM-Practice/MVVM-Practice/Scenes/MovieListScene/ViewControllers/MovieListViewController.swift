@@ -14,15 +14,18 @@ class MovieListViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.movieListViewModel?.viewDidLoad()
-        self.movieListViewModel?.didLoad = self.itemsDidLoad(items:)
+        self.movieListViewModel?.didLoad = self.itemsDidLoad(items:indexPath:)
     }
     
     func setupViewModel(viewModel: MovieListViewModelProtocol){
         self.movieListViewModel = viewModel
     }
     
-    func itemsDidLoad(items: [MovieItemListViewModelProtocol]?){
+    func itemsDidLoad(items: [MovieItemListViewModelProtocol]?, indexPath: [IndexPath]?){
         
+       let indexPath = indexPath ?? []
+        
+        self.tableView.insertRows(at: indexPath, with: .none)
     }
 }
 
@@ -32,7 +35,13 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate{
         self.movieListViewModel?.items.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       return UITableViewCell()
+        
+        guard let viewModel = self.movieListViewModel?.items[indexPath.row],   let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellReusableIdentifier), let cellType = cell as? MovieItemTableViewCellProtocol else{ return UITableViewCell()}
+ 
+        cellType.cofigure(viewModel: viewModel)
+        return cell
+        
+       
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movieListViewModel?.didSelectMovieItem(indexPath: indexPath)

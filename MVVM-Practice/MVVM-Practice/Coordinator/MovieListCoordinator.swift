@@ -7,7 +7,10 @@
 
 import UIKit
 
-
+protocol MovieListCoordinatorProtocol: Coordinator{
+    var parentCoordinator: Coordinator? { get }
+    var navigationController: UINavigationController? { get }
+}
 
 final class MovieListCoordinator: Coordinator{
     

@@ -1,5 +1,5 @@
 //
-//  AppContainer.swift
+//  MovieDetailListContainer.swift
 //  MVVM-Practice
 //
 //  Created by Khurram Iqbal on 17/11/2021.
@@ -8,40 +8,39 @@
 import Foundation
 
 import UIKit
-class MovieListContainer{
+class MovieDetailListContainer{
     private  var resolver: Container?
     init() {
         resolver = Container()
     }
-    func makeMovieListViewController(coordinator: MovieListCoordinator)->UIViewController {
+    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinator)->UIViewController {
         
-        self.makeMovieListViewModel()
+        self.makeMovieDetailViewModel()
         
         resolver = resolver?.register(Coordinator.self, { _ in
             return coordinator
         })
-        let viewController:MovieListViewController = MovieListViewController.instantiate(nil, resolver: resolver)
-        if let viewModel = self.getMovieListViewModelProtocol(){
-            viewController.setupViewModel(viewModel: viewModel)
-        }
+        let viewController: MovieDetailViewController = MovieDetailViewController.instantiate(nil, resolver: resolver)
+     
+        viewController.setViewModel(viewModel: coordinator.getMovieDetailViewModel())
        
         return viewController
         
     }
     
-    private func makeMovieListViewModel(){
+    private func makeMovieDetailViewModel(){
         
         self.makeMovieListRepository()
         guard let resolver = self.resolver else{return}
         self.resolver =  resolver.register(MovieListViewModelProtocol.self) { resolver in
-            return DefaultMovieListViewModel.init(repository: try! resolver.resolve(type: MovieListImageRepositoryProtocol.self))
+            return DefaultMovieListViewModel.init(repository: try! resolver.resolve(type: MovieListRepositoryProtocol.self))
         }
     }
     
      private func makeMovieListRepository(){
         self.makeNetworkManager()
         guard let resolver = self.resolver else{return}
-        self.resolver = resolver.register(MovieListImageRepositoryProtocol.self) { resolver in
+        self.resolver = resolver.register(MovieListRepositoryProtocol.self) { resolver in
             return DefaultMovieListRepository.init(networkManager: try! resolver.resolve(type: NetworkProtocol.self))
         }
         
@@ -53,11 +52,12 @@ class MovieListContainer{
         
     }
     
-   private func makeDatabaseManager(){
+    private func makeDatabaseManager(){
         
     }
-     func getMovieListViewModelProtocol()->MovieListViewModelProtocol?{
-        return try? self.resolver?.resolve(type: MovieListViewModelProtocol.self)
+    
+    func getMovieDetailViewModelProtocol()->MovieDetailViewModelProtocol?{
+        return try? self.resolver?.resolve(type: MovieDetailViewModelProtocol.self)
     }
    
 }

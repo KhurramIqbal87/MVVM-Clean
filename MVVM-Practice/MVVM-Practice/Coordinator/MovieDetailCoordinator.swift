@@ -9,16 +9,16 @@ import UIKit
 
 
 
-final class MovieListDetailCoordinator: Coordinator{
+final class MovieDetailCoordinator: Coordinator{
     
     private weak var parentCoordinator: Coordinator?
     private weak var navigationController: UINavigationController?
     private(set) var childCordinators: [Coordinator] = []
-    private var moviedetailViewModel: MovieItemListViewModelProtocol
+    private var moviedetailViewModel: MovieDetailViewModelProtocol
     
     
     
-    init(navigationController: UINavigationController, parentCoordinator: Coordinator, movieDetailViewModel: MovieItemListViewModelProtocol){
+    init(navigationController: UINavigationController, parentCoordinator: Coordinator, movieDetailViewModel: MovieDetailViewModelProtocol){
         self.navigationController = navigationController
         self.parentCoordinator = parentCoordinator
         self.moviedetailViewModel = movieDetailViewModel
@@ -26,10 +26,10 @@ final class MovieListDetailCoordinator: Coordinator{
     
     func start() {
         // objectNo 1
-        let container = MovieListContainer()
-        let movieListViewController = container.makeMovieListViewController(coordinator: self)
+        let container = MovieDetailListContainer()
+        let movieListViewController = container.makeMovieDetailListViewController(coordinator: self)
         
-        if let viewModel = container.getMovieListViewModelProtocol() as? DefaultMovieListViewModel{
+        if let viewModel = container.getMovieDetailViewModelProtocol() as? DefaultMovieDetailViewModel{
             viewModel.setCoordinator(coordinator: self)
         }
         self.navigationController?.setViewControllers([movieListViewController], animated: true)
@@ -37,6 +37,9 @@ final class MovieListDetailCoordinator: Coordinator{
     
     func childDidFinish() {
         self.parentCoordinator?.childDidFinish(coordinator: self)
+    }
+    func getMovieDetailViewModel()-> MovieDetailViewModelProtocol{
+        return self.moviedetailViewModel
     }
    
 }

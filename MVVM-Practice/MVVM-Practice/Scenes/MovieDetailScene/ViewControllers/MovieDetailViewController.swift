@@ -1,0 +1,34 @@
+//
+//  MovieListViewController.swift
+//  MVVM-Practice
+//
+//  Created by Khurram Iqbal on 24/01/2022.
+//
+
+import Foundation
+import UIKit
+class MovieDetailViewController: UIViewController{
+   
+    var movieDetailViewModel: MovieDetailViewModelProtocol?
+  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupViewModel()
+    }
+    
+    private func setupViewModel(){
+        self.movieDetailViewModel?.viewDidLoad()
+        
+        self.movieDetailViewModel?.didLoad = self.viewModelDidLoad
+    }
+    func setViewModel(viewModel: MovieDetailViewModelProtocol){
+        self.movieDetailViewModel = viewModel
+    }
+    
+    func viewModelDidLoad(){
+        
+    }
+}
+
+extension MovieDetailViewController: StoryboardInstantiate{}
+

@@ -6,10 +6,12 @@
 //
 
 import Foundation
-
-protocol MovieListRepositoryProtocol{
+typealias MovieListImageRepositoryProtocol = PosterImageRepositoryProtocol & MovieListRepositoryProtocol
+protocol MovieListRepositoryProtocol: PosterImageRepositoryProtocol{
     func getMovies(forIndex: Int, completion:@escaping (_ moviePage: MoviePage?)->Void)
+    
 }
+
 
 
     

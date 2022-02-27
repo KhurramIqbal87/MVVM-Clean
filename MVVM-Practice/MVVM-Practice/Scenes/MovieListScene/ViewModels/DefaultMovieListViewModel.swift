@@ -14,9 +14,9 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
     var items: [MovieItemListViewModelProtocol] = []
     
     var pages: [MoviePage] = []
-    private var repository: MovieListRepositoryProtocol?
+    private var repository: MovieListImageRepositoryProtocol?
     private var coordinator: Coordinator?
-    var didLoad: (([MovieItemListViewModelProtocol]?) -> Void?)?
+    var didLoad: (([MovieItemListViewModelProtocol]?, _ indexPath: [IndexPath]?) -> Void? )?
 //    MARK: ViewModel Setup
     init( repository: MovieListRepositoryProtocol  ){
         self.repository = repository
@@ -43,14 +43,23 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
         let movie =  movies[indexPath.row]
         
         
+        
     }
     
     func getItemsForNextPage() {
         self.repository?.getMovies(forIndex: self.currentPage, completion: { [weak self]  moviePage in
             guard let self = self , let moviePage = moviePage else {return}
             self.pages.append(moviePage)
-            self.items.append(contentsOf: DefaultMovieItemListViewModel.convertModelsToViewModels(movies: moviePage.movies))
-            
+            let movieViewModels = DefaultMovieItemListViewModel.convertModelsToViewModels(movies: moviePage.movies)
+            self.items.append(contentsOf: movieViewModels)
+            var indexPaths: [IndexPath] = []
+            var count = self.items.count
+            for _ in moviePage.movies{
+                let indexPath = IndexPath(row: count, section: 0)
+                indexPaths.append(indexPath)
+                count += 1
+            }
+            self.didLoad?(movieViewModels, indexPaths)
         })
     }
     

@@ -6,20 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MovieItemListViewModelProtocol{
+ 
     var cellReusableIdentifier: String{get}
     var title: String?{get}
     var rating: Double?{get}
     var releaseDate: String {get}
-    var imageData: Data?{get}
     var genreNames: [String]{get}
+    var posterImage: String{get}
     
     
     func getRatings()-> String
     
     func getImage(completion: @escaping ((_ image: Data?)->Void))
     func getFormattedReleaseDate()->String
+    func setPosterRepository(repository: PosterImageRepositoryProtocol)
 }
 
 

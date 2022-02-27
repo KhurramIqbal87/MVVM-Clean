@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
+    private var posterImageRepository: PosterImageRepository?
+    
     var coordinator: Coordinator?
-    var cellReusableIdentifier: String = ""
+    var cellReusableIdentifier: String = "\(MovieItemTableViewCell.self)"
     var rating: Double?
     var title: String?
     var releaseDate: String = ""
+    var posterImage: String = ""
     
-    var imageData: Data?
     
     var genreNames: [String] = []
     
@@ -27,12 +29,20 @@ class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
     }
     
     func getImage(completion: @escaping ((Data?) -> Void)) {
-        
+       
+        self.posterImageRepository?.getImage(relativePath: self.posterImage, completion: { imageData in
+            completion(imageData)
+        })
     }
     func setCoordinator(coordinator: Coordinator){
         self.coordinator = coordinator
     }
+    func setPosterRepository(repository: PosterImageRepositoryProtocol) {
+        self.posterImageRepository = repository as? PosterImageRepository
+    }
     
+}
+extension DefaultMovieItemListViewModel{
     static func convertModelsToViewModels(movies: [Movie])->[DefaultMovieItemListViewModel]{
       
         return movies.compactMap { movie in
@@ -41,8 +51,8 @@ class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
                 return genre.name
             })
             itemListViewModel.releaseDate = movie.release_date
+            itemListViewModel.posterImage = movie.poster_path
             return itemListViewModel
         }
     }
-    
 }
