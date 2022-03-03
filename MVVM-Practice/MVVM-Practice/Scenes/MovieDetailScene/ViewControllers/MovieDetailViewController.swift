@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 class MovieDetailViewController: UIViewController{
    
-    var movieDetailViewModel: MovieDetailViewModelProtocol?
+   private var movieDetailViewModel: MovieDetailViewModelProtocol?
   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViewModel()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.movieDetailViewModel?.viewWillDisappear()
+    }
     private func setupViewModel(){
         self.movieDetailViewModel?.viewDidLoad()
         
@@ -30,5 +33,10 @@ class MovieDetailViewController: UIViewController{
     }
 }
 
-extension MovieDetailViewController: StoryboardInstantiate{}
+extension MovieDetailViewController: StoryboardInstantiate{
+    
+    static var defaultStoryboardName: String = "MovieDetail"
+}
+
+
 

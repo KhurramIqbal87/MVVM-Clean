@@ -22,6 +22,10 @@ class DefaultMovieListRepository: MovieListImageRepositoryProtocol{
        
         networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: movieUrl, parameters: nil) { (success, error: NetworkError?, moviePage: MoviePage?) in
             
+            if success{
+                completion(moviePage)
+            }
+            
         }
     }
     

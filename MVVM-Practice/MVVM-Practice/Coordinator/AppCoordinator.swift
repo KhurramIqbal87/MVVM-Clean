@@ -22,9 +22,9 @@ final class AppCoordinator: Coordinator{
         window.rootViewController = navController
         window.makeKeyAndVisible()
         
-        let loginCoordinator = LoginCoordinator.init(navigationController: navController, parentCoordinator: self)
-        loginCoordinator.start()
-        self.childCordinators.append(loginCoordinator)
+        let movieListCoordinator = MovieListCoordinator.init(navigationController: navController, parentCoordinator: self)
+        movieListCoordinator.start()
+        self.childCordinators.append(movieListCoordinator)
     }
     
     

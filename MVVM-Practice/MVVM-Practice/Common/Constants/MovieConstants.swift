@@ -7,12 +7,12 @@
 
 import Foundation
 class MovieConstants{
-    static let apiKey = "69f8d44407d7b73a4103add4c76fccb6"
+    static let apiKey = "2d1cb88f5b3634abdb5496b940599634"
     //static var THE_MOVIE_URL = "https://api.themoviedb.org/3/movie"
     static let IMAGES_URL = "https://image.tmdb.org/t/p/original"
     static let BASE_URL = "https://api.themoviedb.org/3"
     
-    static let DISCOVER_MOVIES = "/dicover"
+    static let DISCOVER_MOVIES = "/discover"
     static let MOVIE = "/movie"
     static let addComponent = "/"
     static let MOVIE_DETAILS = ""

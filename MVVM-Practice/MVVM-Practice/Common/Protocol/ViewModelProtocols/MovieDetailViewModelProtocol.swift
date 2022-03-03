@@ -9,9 +9,18 @@ import Foundation
 import UIKit
 
  protocol MovieDetailViewModelProtocol: ViewLifeCycleProtocol{
-     
+     var releaseDate: String{get}
+     var overview: String{get}
+     var imagePath: String{get}
+     var title: String{get}
+     var genre: [String]{get}
+     var id: Int{get}
+     var cast: [MovieCastModel]{get}
+     var crew: [MovieCrewModel]{get}
      var didLoad: (()->Void)? { get set }
+     func navigateBack()
+
+    
      func getImage(imagePath: String, compeletion: @escaping ((_ image: Data) -> Void))
-     func setCoordinator(coordinator: MovieDetailCoordinator)
-     func setRepository(repository: MovieDetailImageRepositoryProtocol)
+     
 }

@@ -13,35 +13,35 @@ class MovieDetailListContainer{
     init() {
         resolver = Container()
     }
-    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinator)->UIViewController {
+    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinatorProtocol, movie: Movie)->UIViewController {
         
-        self.makeMovieDetailViewModel()
+        self.makeMovieDetailViewModel(coordinator: coordinator)
         
         resolver = resolver?.register(Coordinator.self, { _ in
             return coordinator
         })
         let viewController: MovieDetailViewController = MovieDetailViewController.instantiate(nil, resolver: resolver)
-     
-        viewController.setViewModel(viewModel: coordinator.getMovieDetailViewModel())
-       
+        if let moviedDetailVM = self.getMovieDetailViewModelProtocol(){
+            viewController.setViewModel(viewModel: moviedDetailVM)
+        }
         return viewController
         
     }
     
-    private func makeMovieDetailViewModel(){
+    private func makeMovieDetailViewModel(coordinator: MovieDetailCoordinatorProtocol){
         
-        self.makeMovieListRepository()
+        self.makeMovieDetailRepository()
         guard let resolver = self.resolver else{return}
-        self.resolver =  resolver.register(MovieListViewModelProtocol.self) { resolver in
-            return DefaultMovieListViewModel.init(repository: try! resolver.resolve(type: MovieListRepositoryProtocol.self))
+        self.resolver =  resolver.register(MovieDetailViewModelProtocol.self) { resolver in
+            return DefaultMovieDetailViewModel.init(coordinator: coordinator, repository: try! resolver.resolve(type: MovieDetailImageRepositoryProtocol.self))
         }
     }
     
-     private func makeMovieListRepository(){
+     private func makeMovieDetailRepository(){
         self.makeNetworkManager()
         guard let resolver = self.resolver else{return}
-        self.resolver = resolver.register(MovieListRepositoryProtocol.self) { resolver in
-            return DefaultMovieListRepository.init(networkManager: try! resolver.resolve(type: NetworkProtocol.self))
+        self.resolver = resolver.register(MovieDetailImageRepositoryProtocol.self) { resolver in
+            return DefaultMovieDetailRepository.init(networkManager: try! resolver.resolve(type: NetworkProtocol.self))
         }
         
     }

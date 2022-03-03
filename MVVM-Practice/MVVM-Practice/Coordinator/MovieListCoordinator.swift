@@ -8,11 +8,10 @@
 import UIKit
 
 protocol MovieListCoordinatorProtocol: Coordinator{
-    var parentCoordinator: Coordinator? { get }
-    var navigationController: UINavigationController? { get }
+    func navigateToDetailController(movie: Movie)
 }
 
-final class MovieListCoordinator: Coordinator{
+final class MovieListCoordinator: MovieListCoordinatorProtocol{
     
     private weak var parentCoordinator: Coordinator?
     private weak var navigationController: UINavigationController?
@@ -36,11 +35,21 @@ final class MovieListCoordinator: Coordinator{
         self.navigationController?.setViewControllers([movieListViewController], animated: true)
     }
     
-    func childDidFinish() {
+  
+    func childDidFinish(coordinator: Coordinator) {
+        
         self.parentCoordinator?.childDidFinish(coordinator: self)
+        self.childCordinators.removeAll { childCordinator in
+            return childCordinator === coordinator
+        }
     }
     func navigateToDetailController(movie: Movie){
-        
+      
+        let coordinator = MovieDetailCoordinator.init(navigationController: self.navigationController ?? UINavigationController(), parentCoordinator: self, movieModel: movie)
+        self.childCordinators.append(coordinator)
+        coordinator.start()
         
     }
 }
+
+

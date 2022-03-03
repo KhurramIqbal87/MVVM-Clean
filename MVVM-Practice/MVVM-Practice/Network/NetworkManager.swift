@@ -52,7 +52,7 @@ final class NetworkManager: NetworkProtocol{
             completion(false,NetworkError.noInternet, nil)
         }
         
-        let urlString: String = "" + endPoint
+        let urlString: String = endPoint
         if let url = URL(string: urlString) {
             
             let request = NSMutableURLRequest(url: url)
@@ -89,12 +89,14 @@ final class NetworkManager: NetworkProtocol{
             completion(saveData,nil)
         }
         guard let url = URL(string: url) else{return}
-        self.session.dataTask(with: url) { data, _, error in
+        let urlRequest = URLRequest(url: url)
+        self.session.downloadTask(with: urlRequest) { url, response, error in
             
-            if let data = data{
+           /* if let data = data{
                 Filing.sharedInstance.saveFile(data: data, fileName: url.absoluteString, fileExtension: ".jpeg")
-            }
-            completion(data,error)
+            }*/
+//            completion(data,error)
+            print(response?.mimeType)
         }
     }
     

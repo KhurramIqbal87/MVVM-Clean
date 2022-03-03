@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol MovieItemListViewModelProtocol{
+protocol MovieItemListViewModelProtocol: PosterImageRepositoryProtocol{
  
     var cellReusableIdentifier: String{get}
     var title: String?{get}
@@ -22,7 +22,7 @@ protocol MovieItemListViewModelProtocol{
     
     func getImage(completion: @escaping ((_ image: Data?)->Void))
     func getFormattedReleaseDate()->String
-    func setPosterRepository(repository: PosterImageRepositoryProtocol)
+   
 }
 
 
