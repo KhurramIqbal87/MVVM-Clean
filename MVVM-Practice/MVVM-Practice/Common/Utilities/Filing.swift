@@ -15,19 +15,20 @@ final class Filing: NSObject{
     }
     func saveFile(data: Data, fileName: String, fileExtension: String){
         
-        self.save(data: data, toDirectory: self.documentDirectory(), withFileName: "images/" + fileName + fileExtension)
+        self.save(data: data, toDirectory: self.documentDirectory(), withFileName:   fileName)
     }
     
     
      func getFile(fileName: String)->Data?{
         
-         let filePath = "images/" + fileName
+         let filePath =  fileName
          return self.read(fromDocumentsWithFileName: filePath)
       
     }
     private func read(fromDocumentsWithFileName fileName: String) -> Data? {
-       
-        guard let filePath = self.append(toPath: self.documentDirectory(), withPathComponent: fileName), let url = URL(string: filePath) else {return nil}
+        let fileNameURL = URL(fileURLWithPath: fileName).lastPathComponent
+        
+        guard let filePath = self.append(toPath: self.documentDirectory(), withPathComponent: fileNameURL), let url = URL(string: filePath) else {return nil}
         
         do {
             let data = try Data(contentsOf: url)
@@ -49,6 +50,7 @@ final class Filing: NSObject{
         }
         
         do {
+            
             try data.write(to: url, options: .atomic)
         } catch {
             print("Error", error)
@@ -68,10 +70,9 @@ final class Filing: NSObject{
         return nil
     }
     private func documentDirectory() -> String {
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
-            .userDomainMask,true)
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         
-        return documentDirectory[0]
+        return documentDirectory[0].absoluteString
     }
 }
 

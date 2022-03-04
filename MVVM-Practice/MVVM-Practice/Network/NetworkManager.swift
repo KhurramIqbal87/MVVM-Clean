@@ -89,15 +89,13 @@ final class NetworkManager: NetworkProtocol{
             completion(saveData,nil)
         }
         guard let url = URL(string: url) else{return}
-        let urlRequest = URLRequest(url: url)
-        self.session.downloadTask(with: urlRequest) { url, response, error in
-            
-           /* if let data = data{
-                Filing.sharedInstance.saveFile(data: data, fileName: url.absoluteString, fileExtension: ".jpeg")
-            }*/
-//            completion(data,error)
-            print(response?.mimeType)
-        }
+        let task = self.session.dataTask(with: url, completionHandler: { data, urlResponse, error in
+             if let data = data{
+                 Filing.sharedInstance.saveFile(data: data, fileName: url.lastPathComponent, fileExtension: ".jpeg")
+             }
+             completion(data,error)
+        })
+        task.resume()
     }
     
     

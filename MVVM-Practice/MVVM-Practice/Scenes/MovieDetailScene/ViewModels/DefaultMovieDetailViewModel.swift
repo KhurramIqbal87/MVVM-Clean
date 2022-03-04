@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
-    var cast: [MovieCastModel] = []
+    private var cast: [MovieCastViewModel] = []
     
-    var crew: [MovieCrewModel] = []
+    private var crew: [MovieCrewViewModel] = []
+    
     
     var releaseDate: String = ""
     var overview: String = ""
@@ -49,14 +50,34 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     func navigateBack() {
         self.coordinator.navigateBack()
     }
+    func getCrew() -> [MovieCrewViewModelProtocol] {
+        return self.crew
+    }
+    
+    
+    func getCast() -> [MoiveCastViewModelProtocol] {
+        return self.cast
+    }
 }
 extension DefaultMovieDetailViewModel{
     
-    func getMovieCredits(){
+    private func getMovieCredits(){
         self.repository.getMovieCredits(movieID: self.id, completion: { [weak self] movieCredit in
-            
+            guard let credit = movieCredit else{return}
+            self?.setCredits(credit: credit)
             self?.didLoad?()
         })
+    }
+    
+    private func setCredits(credit: MovieCredit){
+        
+        self.crew =  credit.crew.compactMap { crewModel in
+            MovieCrewViewModel.convertModelToViewModel(crew: crewModel)
+        }
+        self.cast =  credit.cast.compactMap { castModel in
+            MovieCastViewModel.convertModelToViewModel(cast: castModel)
+        }
+        
     }
 }
 extension DefaultMovieDetailViewModel{

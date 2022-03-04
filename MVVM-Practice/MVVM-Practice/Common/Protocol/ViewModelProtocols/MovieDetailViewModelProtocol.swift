@@ -15,10 +15,13 @@ import UIKit
      var title: String{get}
      var genre: [String]{get}
      var id: Int{get}
-     var cast: [MovieCastModel]{get}
-     var crew: [MovieCrewModel]{get}
+//     var cast: [MovieCastModel]{get}
+//     var crew: [MovieCrewModel]{get}
+     
      var didLoad: (()->Void)? { get set }
      func navigateBack()
+     func getCrew()->[MovieCrewViewModelProtocol]
+     func getCast()->[MoiveCastViewModelProtocol]
 
     
      func getImage(imagePath: String, compeletion: @escaping ((_ image: Data) -> Void))

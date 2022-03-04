@@ -1,14 +1,13 @@
 //
-//  MoiveCrewViewModel.swift
+//  MoiveCastViewModelProtocol.swift
 //  MVVM-Practice
 //
-//  Created by Khurram Iqbal on 28/02/2022.
+//  Created by Khurram Iqbal on 03/04/2022.
 //
 
 import Foundation
-protocol MovieCrewViewModelProtocol: PosterImageRepositoryProtocol{
+protocol MoiveCastViewModelProtocol: PosterImageRepositoryProtocol{
     func getName()->String
     func getImage(completion: @escaping((_ imageData: Data?)->Void))
-    func getDepartment()->String
     
 }

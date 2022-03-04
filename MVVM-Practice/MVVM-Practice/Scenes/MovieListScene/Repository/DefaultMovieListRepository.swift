@@ -19,7 +19,7 @@ class DefaultMovieListRepository: MovieListImageRepositoryProtocol{
     func getMovies(forIndex: Int = 0, completion: @escaping (MoviePage?) -> Void) {
         
         let movieUrl = MovieConstants.getMovieDiscoverURl(forIndex: forIndex)
-       
+        
         networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: movieUrl, parameters: nil) { (success, error: NetworkError?, moviePage: MoviePage?) in
             
             if success{

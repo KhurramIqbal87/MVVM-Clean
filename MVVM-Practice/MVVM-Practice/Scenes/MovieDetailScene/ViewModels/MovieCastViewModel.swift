@@ -1,18 +1,17 @@
 //
-//  MovieCrewViewModel.swift
+//  MovieCastViewModel.swift
 //  MVVM-Practice
 //
-//  Created by Khurram Iqbal on 28/02/2022.
+//  Created by Khurram Iqbal on 04/03/2022.
 //
 
 import Foundation
 
-class MovieCrewViewModel: MovieCrewViewModelProtocol{
+class MovieCastViewModel: MoiveCastViewModelProtocol{
   
     
     private var name: String = ""
     private var profilePath: String = ""
-    private var department: String = ""
     
     func getName()->String{
        return self.name
@@ -24,19 +23,16 @@ class MovieCrewViewModel: MovieCrewViewModelProtocol{
             
         }
     }
-    func getDepartment() -> String {
-        return self.department
-    }
+    
 }
 
-extension MovieCrewViewModel{
-    static func convertModelToViewModel(crew: MovieCrewModel)->MovieCrewViewModelProtocol{
-        let crewVM = MovieCrewViewModel()
-        crewVM.department = crew.job
-        crewVM.name = crew.name
-        crewVM.profilePath = crew.profileImageURL
+extension MovieCastViewModel{
+    static func convertModelToViewModel(cast: MovieCastModel)-> MovieCastViewModel{
+        let castVM = MovieCastViewModel()
+        castVM.name = cast.name
+        castVM.profilePath = cast.profileImageURL
         
-        return crewVM
+        return castVM
     }
 }
 
