@@ -8,17 +8,16 @@
 import Foundation
 
 struct MovieCredit: Decodable{
-    var name: String
-    var profileImageURL: String
-    var crew: [MovieCrewModel]
+    var id: Int
     var cast: [MovieCastModel]
+    var crew: [MovieCrewModel]
     
     
     enum CodingKeys: String,CodingKey{
-        case name = "name"
-        case profileImageURL = "profile_path"
-        case crew = "crew"
+        case id = "id"
         case cast = "cast"
+        case crew = "crew"
+      
     }
 }
 

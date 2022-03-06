@@ -8,6 +8,8 @@
 import Foundation
 import Foundation
 class DefaultMovieDetailRepository: MovieDetailImageRepositoryProtocol{
+    
+    
    
     private let networkSharedInstance = NetworkManager.sharedInstance
    
@@ -15,7 +17,16 @@ class DefaultMovieDetailRepository: MovieDetailImageRepositoryProtocol{
     init (networkManager: NetworkProtocol){
         self.networkManager = networkManager
     }
-    
+    func getGenre(completion: @escaping (([Genre]) -> Void)) {
+        let genreURL = MovieConstants.getGenreURl()
+        
+        networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: genreURL, parameters: nil) { (success, error: NetworkError?, genre: GenreModel?) in
+            if success{
+                completion(genre?.genres ?? [])
+            }
+            
+        }
+    }
     func getMovieDetails(movieID: Int, completion: @escaping (MovieDetail?) -> Void) {
         let movieDetailUrl = MovieConstants.getMovieDetailURl(movieId: movieID)
        
@@ -27,8 +38,10 @@ class DefaultMovieDetailRepository: MovieDetailImageRepositoryProtocol{
     func getMovieCredits(movieID: Int, completion: @escaping (MovieCredit?) -> Void) {
         let movieCreditUrl = MovieConstants.getMovieCreditURl(movieId: movieID)
        
-        networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: movieCreditUrl, parameters: nil) { (success, error: NetworkError?, movieDetail: MovieCredit?) in
-            
+        networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: movieCreditUrl, parameters: nil) { (success, error: NetworkError?, movieCredit: MovieCredit?) in
+            if success{
+                completion(movieCredit)
+            }
         }
     }
     

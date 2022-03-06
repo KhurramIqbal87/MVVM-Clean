@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
+    
+    
     private var cast: [MovieCastViewModel] = []
     
     private var crew: [MovieCrewViewModel] = []
-    
+    private var genres: [GenreViewModel] = []
     
     var releaseDate: String = ""
     var overview: String = ""
@@ -24,13 +26,27 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     private  var coordinator: MovieDetailCoordinatorProtocol
     private var repository: MovieDetailImageRepositoryProtocol
     
-    init(coordinator: MovieDetailCoordinatorProtocol, repository: MovieDetailImageRepositoryProtocol){
+    init(coordinator: MovieDetailCoordinatorProtocol, repository: MovieDetailImageRepositoryProtocol, movie: Movie){
         self.coordinator = coordinator
         self.repository =  repository
+        self.title = movie.title
+        self.releaseDate = movie.release_date
+        self.imagePath = movie.poster_path
+        self.overview = movie.overview
+        self.id = Int(movie.id)
     }
     //MARK: - View Life Cycle calls
     func viewDidLoad() {
-        self.getMovieCredits()
+       
+        self.getGenre { [weak self ] genres in
+            self?.setGenre(genre: genres)
+            self?.getMovieCredits()
+        }
+    }
+    private func setGenre(genre: [Genre]){
+        self.genres = genre.compactMap({ genre in
+            return GenreViewModel.init(genre: genre)
+        })
     }
     
     func viewWillDisappear() {
@@ -58,6 +74,9 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     func getCast() -> [MoiveCastViewModelProtocol] {
         return self.cast
     }
+    func getGenre() -> [GenreViewModelProtocol] {
+        return self.genres
+    }
 }
 extension DefaultMovieDetailViewModel{
     
@@ -79,12 +98,18 @@ extension DefaultMovieDetailViewModel{
         }
         
     }
+    private func getGenre(completion: @escaping((_ genres: [Genre])->Void)){
+        
+        self.repository.getGenre { genres in
+            completion(genres)
+        }
+    }
 }
 extension DefaultMovieDetailViewModel{
     static func convertModelToViewModel(movie: Movie, coordinator: MovieDetailCoordinatorProtocol, repository: MovieDetailImageRepositoryProtocol)->DefaultMovieDetailViewModel{
       
         
-        let movieDetailViewModel = DefaultMovieDetailViewModel(coordinator: coordinator, repository: repository)
+        let movieDetailViewModel = DefaultMovieDetailViewModel(coordinator: coordinator, repository: repository, movie: movie)
         movieDetailViewModel.genre = []
         movieDetailViewModel.releaseDate = movie.release_date
         movieDetailViewModel.imagePath = movie.poster_path

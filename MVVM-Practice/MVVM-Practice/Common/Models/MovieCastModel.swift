@@ -9,8 +9,8 @@ import Foundation
 struct MovieCastModel: Decodable{
     public var id: Int
     public var name: String
-    public var profileImageURL: String
-   
+    public var profileImageURL: String?
+    
     enum CodingKeys: String, CodingKey{
         case name = "name"
         case profileImageURL = "profile_path"

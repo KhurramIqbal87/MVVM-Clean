@@ -29,7 +29,7 @@ final class MovieDetailCoordinator: MovieDetailCoordinatorProtocol{
         let movieListViewController = container.makeMovieDetailListViewController(coordinator: self, movie: self.movie)
         self.moviedetailViewModel = container.getMovieDetailViewModelProtocol()
        
-        self.navigationController?.setViewControllers([movieListViewController], animated: true)
+        self.navigationController?.pushViewController(movieListViewController, animated: true)
     }
     
     func childDidFinish() {

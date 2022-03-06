@@ -34,7 +34,7 @@ extension MovieCrewViewModel{
         let crewVM = MovieCrewViewModel()
         crewVM.department = crew.job
         crewVM.name = crew.name
-        crewVM.profilePath = crew.profileImageURL
+        crewVM.profilePath = crew.profileImageURL ?? ""
         
         return crewVM
     }

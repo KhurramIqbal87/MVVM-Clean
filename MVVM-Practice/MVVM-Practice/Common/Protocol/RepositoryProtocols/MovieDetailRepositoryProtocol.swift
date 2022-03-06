@@ -10,6 +10,7 @@ typealias MovieDetailImageRepositoryProtocol = MovieDetailRepositoryProtocol & P
 protocol MovieDetailRepositoryProtocol{
     func getMovieDetails(movieID: Int, completion:@escaping (_ moviePage: MovieDetail?)->Void)
     func getMovieCredits(movieID: Int, completion:@escaping (_ moviePage: MovieCredit?)->Void)
+    func getGenre(completion: @escaping((_ genres: [Genre])->Void))
 }
 
 

@@ -22,7 +22,7 @@ import UIKit
      func navigateBack()
      func getCrew()->[MovieCrewViewModelProtocol]
      func getCast()->[MoiveCastViewModelProtocol]
-
+     func getGenre()->[GenreViewModelProtocol]
     
      func getImage(imagePath: String, compeletion: @escaping ((_ image: Data) -> Void))
      

@@ -30,7 +30,7 @@ extension MovieCastViewModel{
     static func convertModelToViewModel(cast: MovieCastModel)-> MovieCastViewModel{
         let castVM = MovieCastViewModel()
         castVM.name = cast.name
-        castVM.profilePath = cast.profileImageURL
+        castVM.profilePath = cast.profileImageURL ?? ""
         
         return castVM
     }

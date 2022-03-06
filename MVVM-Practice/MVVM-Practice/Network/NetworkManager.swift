@@ -60,7 +60,13 @@ final class NetworkManager: NetworkProtocol{
             self.session.dataTask(with: request as URLRequest) { data, response, error in
                 
                 guard error == nil else {
-                    return completion(false, nil,nil)
+                    let statusCode = (response as! HTTPURLResponse).statusCode
+                  let errorCode =  HTTPStatusCode(rawValue: statusCode)
+                    
+                    let networkError = NetworkError.networkError(error: errorCode!)
+                    print("API status code error = \(errorCode!.rawValue)")
+                    completion(false, networkError, nil)
+                    return 
                 }
                 if let data = data {
                     if let jsonString = String(data: data, encoding: .utf8) {
@@ -71,19 +77,25 @@ final class NetworkManager: NetworkProtocol{
                         let obj = try JSONDecoder().decode(ResponseModel.self, from: data)
 
                         completion(true, nil, obj)
-                    } catch  {
-                        let statusCode = (response as! HTTPURLResponse).statusCode
-                      let errorCode =  HTTPStatusCode(rawValue: statusCode)
-                        
-                        let networkError = NetworkError.networkError(error: errorCode!)
-                        print("API status code error = \(errorCode!.rawValue)")
-                        completion(false, networkError, nil)
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print(context)
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch let DecodingError.valueNotFound(value, context) {
+                        print("Value '\(value)' not found:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch let DecodingError.typeMismatch(type, context)  {
+                        print("Type '\(type)' mismatch:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch {
+                        print("error: ", error)
                     }
                 }
             }.resume()
         }
     }
-    
+   
     func downloadData(url: String, completion:@escaping ((_ data: Data?, _ error: Error?) -> Void)) {
         if let saveData = Filing.sharedInstance.getFile(fileName: url){
             completion(saveData,nil)

@@ -15,6 +15,9 @@ class MovieDetailViewController: UIViewController{
         super.viewDidLoad()
         self.setupViewModel()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.title = self.movieDetailViewModel?.title
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.movieDetailViewModel?.viewWillDisappear()
@@ -29,7 +32,7 @@ class MovieDetailViewController: UIViewController{
     }
     
     func viewModelDidLoad(){
-        
+     
     }
 }
 

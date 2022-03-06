@@ -18,7 +18,8 @@ class MovieConstants{
     static let MOVIE_DETAILS = ""
     static let QUERY_APIKEY = "?api_key=\(apiKey)"
     static let GENRE = "/genre"
-    static let creditDetails = "/credits"
+    static let CREDITS = "/credits"
+    static let LIST = "/list"
     
     //static let VALID_EXPECTED_PATH = "/3/discover/movie?api_key="
     static let QUERY_PAGE = "&page="
@@ -29,14 +30,24 @@ class MovieConstants{
     }
    
     static func getMovieCreditURl(movieId: Int)-> String{
-        let movieCreditUrl = MovieConstants.BASE_URL  + MovieConstants.MOVIE + MovieConstants.addComponent + "\(movieId )" + MovieConstants.addComponent + MovieConstants.QUERY_APIKEY
+        let movieCreditUrl = MovieConstants.BASE_URL +  MovieConstants.MOVIE +  MovieConstants.addComponent +
+            "\(movieId )" +
+            MovieConstants.CREDITS +
+            MovieConstants.QUERY_APIKEY
         return movieCreditUrl
     }
   
     static func getMovieDiscoverURl(forIndex: Int)-> String{
-        let movieDiscoverUrl = MovieConstants.BASE_URL + MovieConstants.DISCOVER_MOVIES + MovieConstants.MOVIE + MovieConstants.QUERY_APIKEY + MovieConstants.QUERY_PAGE + "\(forIndex)"
+        let movieDiscoverUrl = MovieConstants.BASE_URL +  MovieConstants.DISCOVER_MOVIES + MovieConstants.MOVIE + MovieConstants.QUERY_APIKEY + MovieConstants.QUERY_PAGE + "\(forIndex)"
         return movieDiscoverUrl
     }
-   
+    static func getGenreURl()-> String{
+        let genreUrl = MovieConstants.BASE_URL +
+            MovieConstants.GENRE +
+            MovieConstants.MOVIE +
+            MovieConstants.LIST +
+            MovieConstants.QUERY_APIKEY
+        return genreUrl
+    }
     
 }

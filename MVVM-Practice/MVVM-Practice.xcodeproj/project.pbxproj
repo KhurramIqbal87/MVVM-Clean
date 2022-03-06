@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D50C0A8527D22D8700C9E21F /* MovieCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C0A8427D22D8700C9E21F /* MovieCastViewModel.swift */; };
 		D50C0A8727D22E9300C9E21F /* MoiveCastViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C0A8627D22E9300C9E21F /* MoiveCastViewModelProtocol.swift */; };
+		D50C0A9127D4CBA800C9E21F /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C0A9027D4CBA700C9E21F /* GenreViewModel.swift */; };
 		D514AD7427523971004F5F5D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD7327523971004F5F5D /* LoginCoordinator.swift */; };
 		D514AD76275239C6004F5F5D /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514AD75275239C6004F5F5D /* SplashCoordinator.swift */; };
 		D51EB1CB27573F80003A177E /* MVVM_PracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EB1CA27573F80003A177E /* MVVM_PracticeTests.swift */; };
@@ -102,6 +103,7 @@
 /* Begin PBXFileReference section */
 		D50C0A8427D22D8700C9E21F /* MovieCastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastViewModel.swift; sourceTree = "<group>"; };
 		D50C0A8627D22E9300C9E21F /* MoiveCastViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoiveCastViewModelProtocol.swift; sourceTree = "<group>"; };
+		D50C0A9027D4CBA700C9E21F /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
 		D514AD7327523971004F5F5D /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		D514AD75275239C6004F5F5D /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		D514AD7927523A3D004F5F5D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				D5C881F927CC1197000D0430 /* DefaultMovieDetailViewModel.swift */,
+				D50C0A9027D4CBA700C9E21F /* GenreViewModel.swift */,
 				D50C0A8427D22D8700C9E21F /* MovieCastViewModel.swift */,
 				D524A58927CCC090001CDB1A /* MovieCrewViewModel.swift */,
 			);
@@ -759,6 +762,7 @@
 				D57DF4A827BD0F9C006B1E42 /* MovieDetailViewModelProtocol.swift in Sources */,
 				D5CFFDDC27C80F3C004D1FAE /* MovieCredit.swift in Sources */,
 				D50C0A8527D22D8700C9E21F /* MovieCastViewModel.swift in Sources */,
+				D50C0A9127D4CBA800C9E21F /* GenreViewModel.swift in Sources */,
 				D57DF4AA27BD4499006B1E42 /* MovieDetail.swift in Sources */,
 				D570830A2752422400788F32 /* AppCoordinator.swift in Sources */,
 				D5BDC4E4272911790094E9C4 /* LoginValidation.swift in Sources */,
