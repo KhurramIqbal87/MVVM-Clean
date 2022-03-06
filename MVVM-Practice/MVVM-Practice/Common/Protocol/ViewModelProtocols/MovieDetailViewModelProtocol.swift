@@ -13,7 +13,6 @@ import UIKit
      var overview: String{get}
      var imagePath: String{get}
      var title: String{get}
-     var genre: [String]{get}
      var id: Int{get}
 //     var cast: [MovieCastModel]{get}
 //     var crew: [MovieCrewModel]{get}

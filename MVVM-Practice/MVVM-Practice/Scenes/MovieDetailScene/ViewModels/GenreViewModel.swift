@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 final class GenreViewModel: GenreViewModelProtocol{
     
-    private var id: Int
-    private var name: String
+     var id: Int
+     var name: String = ""
     
     init(genre: Genre){
         self.id = Int(genre.id)
         self.name = genre.name
+        
+    }
+    init(id: Int){
+        self.id = Int(id)
         
     }
     func getGenreName()->String{

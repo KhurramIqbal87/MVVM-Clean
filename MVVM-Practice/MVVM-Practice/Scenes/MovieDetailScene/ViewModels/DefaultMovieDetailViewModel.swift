@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
-    
-    
     private var cast: [MovieCastViewModel] = []
     
     private var crew: [MovieCrewViewModel] = []
@@ -19,9 +17,9 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     var overview: String = ""
     var imagePath: String = ""
     var title: String = ""
-    var genre: [String] = []
     var didLoad: (() -> Void)?
     var id: Int = 0
+  
 
     private  var coordinator: MovieDetailCoordinatorProtocol
     private var repository: MovieDetailImageRepositoryProtocol
@@ -34,6 +32,9 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
         self.imagePath = movie.poster_path
         self.overview = movie.overview
         self.id = Int(movie.id)
+        self.genres = movie.genre_ids.compactMap({ id in
+            return GenreViewModel(id: id)
+        })
     }
     //MARK: - View Life Cycle calls
     func viewDidLoad() {
@@ -44,9 +45,16 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
         }
     }
     private func setGenre(genre: [Genre]){
-        self.genres = genre.compactMap({ genre in
-            return GenreViewModel.init(genre: genre)
+       let genres = genre.compactMap({ genreMap in
+            return GenreViewModel.init(genre: genreMap)
         })
+        
+        self.genres = genres.filter { genreFilter in
+            return self.genres.contains { genre2 in
+                return genre2.id == genreFilter.id
+            }
+        }
+        print(self.genres.count)
     }
     
     func viewWillDisappear() {
@@ -110,7 +118,7 @@ extension DefaultMovieDetailViewModel{
       
         
         let movieDetailViewModel = DefaultMovieDetailViewModel(coordinator: coordinator, repository: repository, movie: movie)
-        movieDetailViewModel.genre = []
+        movieDetailViewModel.genres = []
         movieDetailViewModel.releaseDate = movie.release_date
         movieDetailViewModel.imagePath = movie.poster_path
         movieDetailViewModel.overview = movie.overview
