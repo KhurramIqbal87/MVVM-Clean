@@ -35,7 +35,6 @@ final class MovieListCoordinator: MovieListCoordinatorProtocol{
         self.navigationController?.setViewControllers([movieListViewController], animated: true)
     }
     
-  
     func childDidFinish(coordinator: Coordinator) {
         
         self.parentCoordinator?.childDidFinish(coordinator: self)
@@ -51,5 +50,3 @@ final class MovieListCoordinator: MovieListCoordinatorProtocol{
         
     }
 }
-
-
