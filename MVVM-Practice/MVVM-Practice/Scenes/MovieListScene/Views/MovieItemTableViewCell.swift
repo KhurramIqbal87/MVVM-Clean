@@ -37,7 +37,7 @@ class MovieItemTableViewCell: UITableViewCell, MovieItemTableViewCellProtocol {
     }
     
    private func setImage(image: UIImage){
-       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 ) {
+       DispatchQueue.main.asyncAfter(deadline: .now()  ) {
            self.posterImageView?.image = image
        }
        
