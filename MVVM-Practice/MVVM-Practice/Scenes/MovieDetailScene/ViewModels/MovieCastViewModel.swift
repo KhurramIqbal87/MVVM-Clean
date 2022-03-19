@@ -17,7 +17,7 @@ class MovieCastViewModel: MoiveCastViewModelProtocol{
        return self.name
     }
     func getImage(completion: @escaping((_ imageData: Data?)->Void)){
-        self.getImage(relativePath: self.profilePath) { imageData in
+        self.getImage(relativePath: self.profilePath, width: 400) { imageData in
             guard let imageData = imageData else{return}
             completion(imageData)
             

@@ -9,7 +9,7 @@ import Foundation
 class MovieConstants{
     static let apiKey = "2d1cb88f5b3634abdb5496b940599634"
     //static var THE_MOVIE_URL = "https://api.themoviedb.org/3/movie"
-    static let IMAGES_URL = "https://image.tmdb.org/t/p/original"
+    static let IMAGES_URL = "https://image.tmdb.org/t/p/"
     static let BASE_URL = "https://api.themoviedb.org/3"
     
     static let DISCOVER_MOVIES = "/discover"
@@ -50,4 +50,15 @@ class MovieConstants{
         return genreUrl
     }
     
+    static func getImageURL(pixelWidth:  Float, relativeURL: String)-> String{
+        var pixel = "w100"
+        switch pixelWidth{
+        case 0...200: pixel = "w200"
+        case 201...300: pixel = "w300"
+        case 301...500: pixel = "w400"
+        default: pixel = "original"
+        }
+        return  MovieConstants.IMAGES_URL + pixel + relativeURL
+         
+    }
 }

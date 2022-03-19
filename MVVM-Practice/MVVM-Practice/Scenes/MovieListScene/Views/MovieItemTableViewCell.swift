@@ -18,14 +18,14 @@ class MovieItemTableViewCell: UITableViewCell, MovieItemTableViewCellProtocol {
     
     func cofigure(viewModel: MovieItemListViewModelProtocol) {
         self.viewModel = viewModel
-        posterImageView?.image = nil
+        self.posterImageView?.image = UIImage(named: "placeholder-image")
+        let width = self.posterImageView?.frame.width ?? 300
         DispatchQueue.global(qos: .utility).async { [weak self] in
-            guard let self = self else {return}
-            self.viewModel?.getImage(completion: { [weak self] imageData in
+            guard let self = self  else {return}
+            self.viewModel?.getImage(width: Float(width), completion: { [weak self] imageData in
                 guard let imageData = imageData, let image = UIImage(data: imageData) else{return}
-                DispatchQueue.main.async {
-                    self?.posterImageView?.image = image
-                }
+                
+                self?.setImage(image: image)
                
             })
             
@@ -36,7 +36,12 @@ class MovieItemTableViewCell: UITableViewCell, MovieItemTableViewCellProtocol {
         self.releaseDateLabel?.text = self.viewModel?.getFormattedReleaseDate()
     }
     
-
+   private func setImage(image: UIImage){
+       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 ) {
+           self.posterImageView?.image = image
+       }
+       
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

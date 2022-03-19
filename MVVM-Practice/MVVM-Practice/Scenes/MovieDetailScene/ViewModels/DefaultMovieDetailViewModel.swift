@@ -63,7 +63,7 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     }
    //MARK: - Protocol Functions
     func getImage(imagePath: String, compeletion: @escaping ((Data) -> Void)) {
-        self.repository.getImage(relativePath: imagePath, completion: { imageData in
+        self.repository.getImage(relativePath: imagePath, width: 400, completion: { imageData in
             
             if let data = imageData{
                 compeletion(data)

@@ -19,7 +19,7 @@ protocol MovieItemListViewModelProtocol: PosterImageRepositoryProtocol{
     
     func getRatings()-> String
     func getTitle()->String
-    func getImage(completion: @escaping ((_ image: Data?)->Void))
+    func getImage(width: Float, completion: @escaping ((_ image: Data?)->Void))
     func getFormattedReleaseDate()->String
     
    

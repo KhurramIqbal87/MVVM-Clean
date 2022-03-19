@@ -28,12 +28,12 @@ class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
     func getTitle() -> String {
         return "Title: \(self.title ?? "")"
     }
-    func getImage(completion: @escaping ((Data?) -> Void)) {
+    func getImage(width: Float, completion: @escaping ((Data?) -> Void)) {
         if let data = self.imageData {
             completion(data)
             return
         }
-        self.getImage(relativePath: self.posterImage) { [weak self] imageData in
+        self.getImage(relativePath: self.posterImage, width: width) { [weak self] imageData in
             self?.imageData = imageData
             completion(imageData)
         }
