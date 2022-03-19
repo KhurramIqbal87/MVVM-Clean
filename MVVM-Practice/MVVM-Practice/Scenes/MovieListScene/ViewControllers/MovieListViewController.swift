@@ -46,7 +46,7 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate{
         self.movieListViewModel?.items.count ?? 0
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return (self.view.frame.width * 0.377 ) + 55
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

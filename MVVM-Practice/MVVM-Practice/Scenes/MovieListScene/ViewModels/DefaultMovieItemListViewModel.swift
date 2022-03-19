@@ -14,21 +14,27 @@ class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
     var title: String?
     var releaseDate: String = ""
     var posterImage: String = ""
-    
+    private var imageData: Data?
     
     var genreNames: [String] = []
     
     func getFormattedReleaseDate() -> String {
-        return self.releaseDate
+        return "Release Date: \(self.releaseDate)"
     }
    
     func getRatings() -> String {
-        return "\(self.rating ?? 0.0)"
+        return "Ratings: \(self.rating ?? 0.0)"
     }
-    
+    func getTitle() -> String {
+        return "Title: \(self.title ?? "")"
+    }
     func getImage(completion: @escaping ((Data?) -> Void)) {
-       
-        self.getImage(relativePath: self.posterImage) { imageData in
+        if let data = self.imageData {
+            completion(data)
+            return
+        }
+        self.getImage(relativePath: self.posterImage) { [weak self] imageData in
+            self?.imageData = imageData
             completion(imageData)
         }
     }

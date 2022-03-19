@@ -17,11 +17,11 @@ protocol MovieItemListViewModelProtocol: PosterImageRepositoryProtocol{
     var genreNames: [String]{get}
     var posterImage: String{get}
     
-    
     func getRatings()-> String
-    
+    func getTitle()->String
     func getImage(completion: @escaping ((_ image: Data?)->Void))
     func getFormattedReleaseDate()->String
+    
    
 }
 

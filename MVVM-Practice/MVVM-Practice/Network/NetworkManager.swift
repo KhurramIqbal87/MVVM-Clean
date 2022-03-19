@@ -19,7 +19,10 @@ final class NetworkManager: NetworkProtocol{
     private static let timeoutSession:Double = 60
     
     private let session: URLSession = URLSession.shared
-    
+    private let semaphore = DispatchSemaphore(value: 5)
+    private let group = DispatchGroup()
+    private let queue = DispatchQueue.global(qos: .userInteractive)
+
     func getData(_ params: Parameter?, _ headers: Header?, url: String, methodType: HTTPMethod, completion:  ((_ success: Bool, _ error: NetworkError?,  _ response: Parameter )->Void)){
        
         if !Reachability.isConnectedToNetwork(){
@@ -99,15 +102,25 @@ final class NetworkManager: NetworkProtocol{
     func downloadData(url: String, completion:@escaping ((_ data: Data?, _ error: Error?) -> Void)) {
         if let saveData = Filing.sharedInstance.getFile(fileName: url){
             completion(saveData,nil)
+            return
         }
         guard let url = URL(string: url) else{return}
-        let task = self.session.dataTask(with: url, completionHandler: { data, urlResponse, error in
-             if let data = data{
-                 Filing.sharedInstance.saveFile(data: data, fileName: url.lastPathComponent, fileExtension: ".jpeg")
-             }
-             completion(data,error)
-        })
-        task.resume()
+        group.enter()
+        semaphore.wait()
+        queue.async(group: group){
+            let task = self.session.dataTask(with: url, completionHandler: { [weak self]data, urlResponse, error in
+                guard let self = self else{return}
+                 if let data = data{
+                     Filing.sharedInstance.saveFile(data: data, fileName: url.lastPathComponent, fileExtension: ".jpeg")
+                 }
+                 completion(data,error)
+                self.semaphore.signal()
+                self.group.leave()
+            })
+            task.resume()
+        }
+     
+        
     }
     
     
