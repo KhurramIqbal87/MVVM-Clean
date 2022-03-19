@@ -60,6 +60,7 @@ event occur on view which updates viewModel - viewModel updates coordinator - co
 graph TD;
 View-->ViewModel;
 ViewModel-->Coordinator;
+Coordinator-->ViewModel;
 ViewModel-->Repository;
 Repository-->Database;
 Repository-->Network;
