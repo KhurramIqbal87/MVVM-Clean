@@ -17,4 +17,5 @@ protocol MovieListViewModelProtocol: ViewLifeCycleProtocol{
     var totalPage: Int {get}
     var items: [MovieItemListViewModelProtocol]{get}
     var pages: [MoviePage]{get}
+    func getTitle()->String
 }

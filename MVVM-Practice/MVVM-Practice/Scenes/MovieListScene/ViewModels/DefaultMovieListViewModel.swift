@@ -30,6 +30,7 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
     func viewDidLoad() {
         self.getItemsForNextPage()
     }
+    
    
     func viewWillDisappear() {
         if let coordinator = self.coordinator{
@@ -55,6 +56,9 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
             self.makeViewModels(movies: moviePage.movies)
            
         })
+    }
+    func getTitle() -> String {
+        return "Movies"
     }
     private func makeViewModels(movies: [Movie]){
         let movieViewModels = DefaultMovieItemListViewModel.convertModelsToViewModels(movies: movies)

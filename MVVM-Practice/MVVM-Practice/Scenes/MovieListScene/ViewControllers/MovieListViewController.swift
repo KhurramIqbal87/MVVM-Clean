@@ -16,6 +16,10 @@ class MovieListViewController: UIViewController{
         self.movieListViewModel?.viewDidLoad()
         self.movieListViewModel?.didLoad = self.itemsDidLoad(items:indexPath:)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = self.movieListViewModel?.getTitle()
+    }
     
     func setupViewModel(viewModel: MovieListViewModelProtocol){
         self.movieListViewModel = viewModel
