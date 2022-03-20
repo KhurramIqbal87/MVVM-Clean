@@ -3,6 +3,10 @@ This repository is the practice for mvvm clean architect using swift
 
 Model ViewModel Controller Coordinator Container(DI)
 
+No third party library is used
+
+Service Locator pattern is used for Dependency injection
+
 Following Patterns are used in this repository
 
 # Coordinator 
