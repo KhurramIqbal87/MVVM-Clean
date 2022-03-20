@@ -64,7 +64,7 @@ For moving from one scene to other Scene
 
 event occur on view which updates viewModel - viewModel updates coordinator - coordinator act accordingly move to nextController or pop current controller.
 
-# Dependencies
+# Dependencies Diagram
 ```mermaid
 graph TD;
 View-->ViewModel;
