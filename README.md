@@ -50,12 +50,15 @@ Make sure you make protocol layer and then implement manager as implementation o
  this is the local storage system and can CRUD create read update and delete records. Make sure you follow protocol approach. There can be numerous
 database for example coredatabase, sqlite, UserDefaults, Keychain. You should make sure any database type should provide these basic funcs.
 
-Entity: These are basic Models which we get in response from server communication.
+# Entity: 
+These are basic Models which we get in response from server communication.
 
+# Navigation
 For moving from one scene to other Scene
 
 event occur on view which updates viewModel - viewModel updates coordinator - coordinator act accordingly move to nextController or pop current controller.
 
+# Dependencies
 ```mermaid
 graph TD;
 View-->ViewModel;
