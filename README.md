@@ -9,6 +9,8 @@ Service Locator pattern is used for Dependency injection
 
 Following Patterns are used in this repository
 
+TMDB API's are used.
+
 # Coordinator 
 Responsible to navigate to next Controller. Imagine you want to navigate to X scene from Y scene. 
 you have to make sure that you binds every dependency object and even dependent object might need any dependency. So you have to fulfil nested dependency.
