@@ -25,6 +25,12 @@ final class Filing: NSObject{
          return self.read(fromDocumentsWithFileName: filePath)
       
     }
+    func getLocalStorageFileURL(fileName: String)->URL?{
+        let fileNameURL = URL(fileURLWithPath: fileName).lastPathComponent
+        
+        guard let filePath = self.append(toPath: self.documentDirectory(), withPathComponent: fileNameURL), let url = URL(string: filePath) else {return nil}
+        return url
+    }
     private func read(fromDocumentsWithFileName fileName: String) -> Data? {
         let fileNameURL = URL(fileURLWithPath: fileName).lastPathComponent
         
