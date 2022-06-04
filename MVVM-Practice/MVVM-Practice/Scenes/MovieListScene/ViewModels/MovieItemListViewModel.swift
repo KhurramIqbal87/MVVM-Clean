@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
+class MovieItemListViewModel: MovieItemListViewModelType{
   
     var cellReusableIdentifier: String = "\(MovieItemTableViewCell.self)"
     var rating: Double?
@@ -40,11 +40,11 @@ class DefaultMovieItemListViewModel: MovieItemListViewModelProtocol{
     }
     
 }
-extension DefaultMovieItemListViewModel{
-    static func convertModelsToViewModels(movies: [Movie])->[DefaultMovieItemListViewModel]{
+extension MovieItemListViewModel{
+    static func convertModelsToViewModels(movies: [Movie])->[MovieItemListViewModel]{
       
         return movies.compactMap { movie in
-            let itemListViewModel = DefaultMovieItemListViewModel()
+            let itemListViewModel = MovieItemListViewModel()
             itemListViewModel.genreNames = []
             itemListViewModel.releaseDate = movie.release_date
             itemListViewModel.posterImage = movie.poster_path

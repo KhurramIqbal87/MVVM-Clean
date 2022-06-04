@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol MoiveCastViewModelProtocol: PosterImageRepositoryProtocol{
+protocol MoiveCastViewModelProtocol: PosterImageRepositoryType{
     func getName()->String
     func getImage(completion: @escaping((_ imageData: Data?)->Void))
     

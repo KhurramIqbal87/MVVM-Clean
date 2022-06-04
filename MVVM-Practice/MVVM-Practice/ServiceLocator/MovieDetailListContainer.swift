@@ -10,37 +10,43 @@ import Foundation
 import UIKit
 class MovieDetailListContainer{
     private  var resolver: Container?
+    weak var delegate: MovieDetailNavigationEvents?
     init() {
         resolver = Container()
     }
-    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinatorProtocol, movie: Movie)->UIViewController {
+    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinatorType, movie: Movie)->UIViewController {
         
         self.makeMovieDetailViewModel(coordinator: coordinator, movie: movie)
         
         resolver = resolver?.register(Coordinator.self, { _ in
             return coordinator
         })
-        let viewController: MovieDetailViewController = MovieDetailViewController.instantiate(nil, resolver: resolver)
-        if let moviedDetailVM = self.getMovieDetailViewModelProtocol(){
-            viewController.setViewModel(viewModel: moviedDetailVM)
+        
+        guard let moviedDetailVM = self.getMovieDetailViewModelProtocol() else {
+            return UIViewController()
         }
+        
+        
+        let viewController = MovieDetailViewController.init(movieDetailViewModel: moviedDetailVM)
         return viewController
         
     }
     
-    private func makeMovieDetailViewModel(coordinator: MovieDetailCoordinatorProtocol, movie: Movie){
+    private func makeMovieDetailViewModel(coordinator: MovieDetailCoordinatorType, movie: Movie){
         
         self.makeMovieDetailRepository()
         guard let resolver = self.resolver else{return}
-        self.resolver =  resolver.register(MovieDetailViewModelProtocol.self) { resolver in
-            return DefaultMovieDetailViewModel.init(coordinator: coordinator, repository: try! resolver.resolve(type: MovieDetailImageRepositoryProtocol.self), movie: movie)
+        self.resolver =  resolver.register(MovieDetailViewModelType.self) {  resolver in
+            let viewModel =  MovieDetailViewModel.init( repository: try! resolver.resolve(type: MovieDetailImageRepositoryType.self), movie: movie)
+            viewModel.delegate = self
+            return viewModel
         }
     }
     
      private func makeMovieDetailRepository(){
         self.makeNetworkManager()
         guard let resolver = self.resolver else{return}
-        self.resolver = resolver.register(MovieDetailImageRepositoryProtocol.self) { resolver in
+        self.resolver = resolver.register(MovieDetailImageRepositoryType.self) { resolver in
             return DefaultMovieDetailRepository.init(networkManager: try! resolver.resolve(type: NetworkProtocol.self))
         }
         
@@ -56,10 +62,15 @@ class MovieDetailListContainer{
         
     }
     
-    func getMovieDetailViewModelProtocol()->MovieDetailViewModelProtocol?{
-        return try? self.resolver?.resolve(type: MovieDetailViewModelProtocol.self)
+    func getMovieDetailViewModelProtocol()->MovieDetailViewModelType?{
+        return try? self.resolver?.resolve(type: MovieDetailViewModelType.self)
     }
    
 }
 
 
+extension MovieDetailListContainer: MovieDetailNavigationEvents{
+    func viewWillDisappear() {
+        self.delegate?.viewWillDisappear()
+    }
+}

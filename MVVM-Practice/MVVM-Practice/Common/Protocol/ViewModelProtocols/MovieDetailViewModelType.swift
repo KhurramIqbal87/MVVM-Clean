@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
- protocol MovieDetailViewModelProtocol: ViewLifeCycleProtocol{
+ protocol MovieDetailViewModelType: ViewLifeCycle{
      var releaseDate: String{get}
      var overview: String{get}
      var imagePath: String{get}

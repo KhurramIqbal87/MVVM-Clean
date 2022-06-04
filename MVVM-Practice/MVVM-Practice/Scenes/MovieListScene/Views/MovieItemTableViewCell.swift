@@ -14,9 +14,9 @@ class MovieItemTableViewCell: UITableViewCell, MovieItemTableViewCellProtocol {
     @IBOutlet private var ratingLabel: UILabel?
     
     
-    var viewModel: MovieItemListViewModelProtocol?
+    var viewModel: MovieItemListViewModelType?
     
-    func cofigure(viewModel: MovieItemListViewModelProtocol) {
+    func cofigure(viewModel: MovieItemListViewModelType) {
         self.viewModel = viewModel
         self.posterImageView?.image = UIImage(named: "placeholder-image")
         let width = self.posterImageView?.frame.width ?? 300

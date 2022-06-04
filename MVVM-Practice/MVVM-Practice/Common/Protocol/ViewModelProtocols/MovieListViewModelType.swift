@@ -6,16 +6,17 @@
 //
 
 import Foundation
-protocol MovieListViewModelProtocol: ViewLifeCycleProtocol{
+protocol MovieListViewModelType: ViewLifeCycle{
     //MARK: - MovieListViewModelInput
     func didSelectMovieItem(indexPath: IndexPath)
     func getItemsForNextPage()
+    func willScrollToIndexPath(index: Int)
     
     //MARK: - MovieListViewModelOutput
-    var didLoad : ((_ items: [MovieItemListViewModelProtocol]?, _ indexPath: [IndexPath]?)->Void?)? {get set}
+    var didLoad : ((_ items: [MovieItemListViewModelType]?, _ indexPath: [IndexPath]?)->Void?)? {get set}
     var currentPage: Int{get}
     var totalPage: Int {get}
-    var items: [MovieItemListViewModelProtocol]{get}
+    var items: [MovieItemListViewModelType]{get}
     var pages: [MoviePage]{get}
     func getTitle()->String
 }

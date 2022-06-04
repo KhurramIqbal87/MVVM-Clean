@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol PosterImageRepositoryProtocol{
+protocol PosterImageRepositoryType{
     func getImage(relativePath: String, width: Float, completion:@escaping (_ imageData: Data?)->Void)
 }
-extension PosterImageRepositoryProtocol{
+extension PosterImageRepositoryType{
     func getImage(relativePath: String, width: Float, completion:@escaping (_ imageData: Data?)->Void){
         let networkSharedInstance = NetworkManager.sharedInstance
         let url = MovieConstants.getImageURL(pixelWidth: width, relativeURL: relativePath)
@@ -21,7 +21,7 @@ extension PosterImageRepositoryProtocol{
     }
 }
 
-final class PosterImageRepository: PosterImageRepositoryProtocol{
+final class PosterImageRepository: PosterImageRepositoryType{
     
 }
 

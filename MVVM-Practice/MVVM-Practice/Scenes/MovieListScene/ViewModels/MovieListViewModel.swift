@@ -7,25 +7,21 @@
 
 import Foundation
 
-class DefaultMovieListViewModel: MovieListViewModelProtocol{
+class MovieListViewModel: MovieListViewModelType{
     var currentPage: Int = 1
     var totalPage: Int = 0
     
-    var items: [MovieItemListViewModelProtocol] = []
-    
+    var items: [MovieItemListViewModelType] = []
+    weak  var movieListNavigationDelegate: MovieListNavigationEvents?
     var pages: [MoviePage] = []
-    private var repository: MovieListImageRepositoryProtocol?
-    private var coordinator: MovieListCoordinatorProtocol?
-    var didLoad: (([MovieItemListViewModelProtocol]?, _ indexPath: [IndexPath]?) -> Void? )?
+    private var repository: MovieListImageRepositoryType?
+    var didLoad: (([MovieItemListViewModelType]?, _ indexPath: [IndexPath]?) -> Void? )?
 //    MARK: ViewModel Setup
-    init( repository: MovieListImageRepositoryProtocol, coordinator: MovieListCoordinatorProtocol ){
+    init( repository: MovieListImageRepositoryType ){
         self.repository = repository
-        self.coordinator = coordinator 
     }
     
-    func setCoordinator(coordinator: MovieListCoordinatorProtocol){
-        self.coordinator = coordinator
-    }
+    
     //MARK: - View Life Cycle
     func viewDidLoad() {
         self.getItemsForNextPage()
@@ -33,10 +29,7 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
     
    
     func viewWillDisappear() {
-        if let coordinator = self.coordinator{
-            coordinator.childDidFinish(coordinator: coordinator)
-            self.coordinator = nil
-        }
+      
     }
     //MARK: - TableView delegates
     func didSelectMovieItem(indexPath: IndexPath) {
@@ -44,7 +37,7 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
             return page.movies
         }
         let movie =  movies[indexPath.row]
-        self.coordinator?.navigateToDetailController(movie: movie)
+        self.movieListNavigationDelegate?.navigateToDetail(movie: movie)
         
         
     }
@@ -61,7 +54,7 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
         return "Movies"
     }
     private func makeViewModels(movies: [Movie]){
-        let movieViewModels = DefaultMovieItemListViewModel.convertModelsToViewModels(movies: movies)
+        let movieViewModels = MovieItemListViewModel.convertModelsToViewModels(movies: movies)
         var indexPaths: [IndexPath] = []
         var count = self.items.count
         for _ in movies{
@@ -73,9 +66,14 @@ class DefaultMovieListViewModel: MovieListViewModelProtocol{
         self.didLoad?(movieViewModels, indexPaths)
         
     }
-    private func updateStates(movieViewModels: [DefaultMovieItemListViewModel]){
+    private func updateStates(movieViewModels: [MovieItemListViewModel]){
         self.items.append(contentsOf: movieViewModels)
         self.currentPage += 1
+    }
+    func willScrollToIndexPath(index: Int) {
+        if self.items.count  - 1 ==  index {
+            self.getItemsForNextPage()
+        }
     }
    
 }

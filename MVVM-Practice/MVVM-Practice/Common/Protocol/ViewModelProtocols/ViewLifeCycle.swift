@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol ViewLifeCycleProtocol{
+protocol ViewLifeCycle{
     func viewDidLoad()
     func viewWillDisappear()
 }

@@ -7,7 +7,13 @@
 
 import Foundation
 import UIKit
-final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
+
+protocol MovieDetailNavigationEvents: AnyObject{
+    func viewWillDisappear()
+}
+final class MovieDetailViewModel: MovieDetailViewModelType{
+    
+    weak var delegate: MovieDetailNavigationEvents?
     private var cast: [MovieCastViewModel] = []
     
     private var crew: [MovieCrewViewModel] = []
@@ -21,11 +27,11 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     var id: Int = 0
   
 
-    private  var coordinator: MovieDetailCoordinatorProtocol
-    private var repository: MovieDetailImageRepositoryProtocol
+  
+    private var repository: MovieDetailImageRepositoryType
     
-    init(coordinator: MovieDetailCoordinatorProtocol, repository: MovieDetailImageRepositoryProtocol, movie: Movie){
-        self.coordinator = coordinator
+    init( repository: MovieDetailImageRepositoryType, movie: Movie){
+        
         self.repository =  repository
         self.title = movie.title
         self.releaseDate = movie.release_date
@@ -58,7 +64,7 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
     }
     
     func viewWillDisappear() {
-        coordinator.childDidFinish(coordinator: coordinator)
+        self.delegate?.viewWillDisappear()
         
     }
    //MARK: - Protocol Functions
@@ -72,7 +78,7 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
         })
     }
     func navigateBack() {
-        self.coordinator.navigateBack()
+        self.delegate?.viewWillDisappear()
     }
     func getCrew() -> [MovieCrewViewModelProtocol] {
         return self.crew
@@ -86,7 +92,7 @@ final class DefaultMovieDetailViewModel: MovieDetailViewModelProtocol{
         return self.genres
     }
 }
-extension DefaultMovieDetailViewModel{
+extension MovieDetailViewModel{
     
     private func getMovieCredits(){
         self.repository.getMovieCredits(movieID: self.id, completion: { [weak self] movieCredit in
@@ -113,11 +119,11 @@ extension DefaultMovieDetailViewModel{
         }
     }
 }
-extension DefaultMovieDetailViewModel{
-    static func convertModelToViewModel(movie: Movie, coordinator: MovieDetailCoordinatorProtocol, repository: MovieDetailImageRepositoryProtocol)->DefaultMovieDetailViewModel{
+extension MovieDetailViewModel{
+    static func convertModelToViewModel(movie: Movie, coordinator: MovieDetailCoordinatorType, repository: MovieDetailImageRepositoryType)->MovieDetailViewModel{
       
         
-        let movieDetailViewModel = DefaultMovieDetailViewModel(coordinator: coordinator, repository: repository, movie: movie)
+        let movieDetailViewModel = MovieDetailViewModel( repository: repository, movie: movie)
         movieDetailViewModel.genres = []
         movieDetailViewModel.releaseDate = movie.release_date
         movieDetailViewModel.imagePath = movie.poster_path

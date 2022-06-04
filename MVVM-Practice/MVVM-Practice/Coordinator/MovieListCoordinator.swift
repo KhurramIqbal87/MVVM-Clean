@@ -27,11 +27,8 @@ final class MovieListCoordinator: MovieListCoordinatorProtocol{
     func start() {
         // objectNo 1
         let container = MovieListContainer()
+        container.delegate = self
         let movieListViewController = container.makeMovieListViewController(coordinator: self)
-        
-        if let viewModel = container.getMovieListViewModelProtocol() as? DefaultMovieListViewModel{
-            viewModel.setCoordinator(coordinator: self)
-        }
         self.navigationController?.setViewControllers([movieListViewController], animated: true)
     }
     
@@ -48,5 +45,10 @@ final class MovieListCoordinator: MovieListCoordinatorProtocol{
         self.childCordinators.append(coordinator)
         coordinator.start()
         
+    }
+}
+extension MovieListCoordinator: MovieListNavigationEvents{
+    func navigateToDetail(movie: Movie) {
+        self.navigateToDetailController(movie: movie)
     }
 }

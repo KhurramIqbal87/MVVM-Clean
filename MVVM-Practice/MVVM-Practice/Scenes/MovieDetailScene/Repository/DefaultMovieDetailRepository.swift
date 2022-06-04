@@ -7,7 +7,7 @@
 
 import Foundation
 import Foundation
-class DefaultMovieDetailRepository: MovieDetailImageRepositoryProtocol{
+class DefaultMovieDetailRepository: MovieDetailImageRepositoryType{
     
     
    

@@ -9,8 +9,8 @@ import UIKit
 
 protocol MovieItemTableViewCellProtocol{
     
-    var viewModel: MovieItemListViewModelProtocol? { get }
-    func cofigure(viewModel: MovieItemListViewModelProtocol)
+    var viewModel: MovieItemListViewModelType? { get }
+    func cofigure(viewModel: MovieItemListViewModelType)
     
 }
 

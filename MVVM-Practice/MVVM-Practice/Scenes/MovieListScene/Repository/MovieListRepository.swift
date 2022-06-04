@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class DefaultMovieListRepository: MovieListImageRepositoryProtocol{
+class MovieListRepository: MovieListImageRepositoryType{
     
     private let networkSharedInstance = NetworkManager.sharedInstance
    

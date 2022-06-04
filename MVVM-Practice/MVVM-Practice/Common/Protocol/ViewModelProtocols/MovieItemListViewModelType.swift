@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol MovieItemListViewModelProtocol: PosterImageRepositoryProtocol{
+protocol MovieItemListViewModelType: PosterImageRepositoryType{
  
     var cellReusableIdentifier: String{get}
     var title: String?{get}
