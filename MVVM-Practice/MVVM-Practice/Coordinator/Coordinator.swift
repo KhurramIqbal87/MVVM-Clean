@@ -14,12 +14,7 @@ protocol Coordinator: AnyObject{
     
     
 }
-extension Coordinator{
 
-    func childDidFinish(coordinator: Coordinator){
-        print("didFinish Call")
-    }
-}
 
 
 

@@ -14,13 +14,10 @@ class MovieDetailListContainer{
     init() {
         resolver = Container()
     }
-    func makeMovieDetailListViewController(coordinator: MovieDetailCoordinatorType, movie: Movie)->UIViewController {
+    func makeMovieDetailListViewController( movie: Movie)->UIViewController {
         
-        self.makeMovieDetailViewModel(coordinator: coordinator, movie: movie)
+        self.makeMovieDetailViewModel( movie: movie)
         
-        resolver = resolver?.register(Coordinator.self, { _ in
-            return coordinator
-        })
         
         guard let moviedDetailVM = self.getMovieDetailViewModelProtocol() else {
             return UIViewController()
@@ -28,17 +25,19 @@ class MovieDetailListContainer{
         
         
         let viewController = MovieDetailViewController.init(movieDetailViewModel: moviedDetailVM)
+        if let vm = moviedDetailVM as? MovieDetailViewModel{
+            vm.delegate = self
+        }
         return viewController
         
     }
     
-    private func makeMovieDetailViewModel(coordinator: MovieDetailCoordinatorType, movie: Movie){
+    private func makeMovieDetailViewModel( movie: Movie){
         
         self.makeMovieDetailRepository()
         guard let resolver = self.resolver else{return}
         self.resolver =  resolver.register(MovieDetailViewModelType.self) {  resolver in
             let viewModel =  MovieDetailViewModel.init( repository: try! resolver.resolve(type: MovieDetailImageRepositoryType.self), movie: movie)
-            viewModel.delegate = self
             return viewModel
         }
     }

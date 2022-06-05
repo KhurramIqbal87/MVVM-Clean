@@ -27,7 +27,11 @@ final class AppCoordinator: Coordinator{
         movieListCoordinator.start()
         self.childCordinators.append(movieListCoordinator)
     }
-    
+    func childDidFinish(coordinator: Coordinator) {
+        self.childCordinators.removeAll { childCordinator in
+            return coordinator === childCordinator
+        }
+    }
     
 }
 

@@ -12,7 +12,7 @@ protocol MovieListCoordinatorProtocol: Coordinator{
 }
 
 final class MovieListCoordinator: MovieListCoordinatorProtocol{
-    
+    private var container: MovieListContainer = MovieListContainer()
     private weak var parentCoordinator: Coordinator?
     private weak var navigationController: UINavigationController?
     private(set) var childCordinators: [Coordinator] = []
@@ -26,22 +26,23 @@ final class MovieListCoordinator: MovieListCoordinatorProtocol{
     
     func start() {
         // objectNo 1
-        let container = MovieListContainer()
         container.delegate = self
-        let movieListViewController = container.makeMovieListViewController(coordinator: self)
+        let movieListViewController = container.makeMovieListViewController()
         self.navigationController?.setViewControllers([movieListViewController], animated: true)
+            
     }
     
     func childDidFinish(coordinator: Coordinator) {
         
-        self.parentCoordinator?.childDidFinish(coordinator: self)
+        self.parentCoordinator?.childDidFinish(coordinator: coordinator)
         self.childCordinators.removeAll { childCordinator in
             return childCordinator === coordinator
         }
     }
     func navigateToDetailController(movie: Movie){
       
-        let coordinator = MovieDetailCoordinator.init(navigationController: self.navigationController ?? UINavigationController(), parentCoordinator: self, movieModel: movie)
+        let coordinator =   MovieDetailCoordinator.init(navigationController: self.navigationController ?? UINavigationController(), parentCoordinator: self, movieModel: movie)
+        
         self.childCordinators.append(coordinator)
         coordinator.start()
         

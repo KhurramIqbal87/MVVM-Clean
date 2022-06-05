@@ -8,11 +8,16 @@
 import UIKit
 typealias MovieDetailCoordinatorType = Coordinator
 final class MovieDetailCoordinator: MovieDetailCoordinatorType{
+   
+    func childDidFinish(coordinator: Coordinator) {
+        
+    }
+    
     
     private weak var parentCoordinator: Coordinator?
+    private var container: MovieDetailListContainer?
     private weak var navigationController: UINavigationController?
     private(set) var childCordinators: [Coordinator] = []
-    private var moviedetailViewModel: MovieDetailViewModelType?
     private var movie: Movie
     
     
@@ -25,12 +30,13 @@ final class MovieDetailCoordinator: MovieDetailCoordinatorType{
     
     func start() {
         // objectNo 1
-        let container = MovieDetailListContainer()
-        container.delegate = self
-        let movieListViewController = container.makeMovieDetailListViewController(coordinator: self, movie: self.movie)
-        self.moviedetailViewModel = container.getMovieDetailViewModelProtocol()
+        container = MovieDetailListContainer()
+        container?.delegate = self
+        if  let movieListViewController = container?.makeMovieDetailListViewController( movie: self.movie){
+         
        
         self.navigationController?.pushViewController(movieListViewController, animated: true)
+        }
     }
     
    private func childDidFinish() {
@@ -43,6 +49,8 @@ final class MovieDetailCoordinator: MovieDetailCoordinatorType{
 }
 extension MovieDetailCoordinator: MovieDetailNavigationEvents{
     func viewWillDisappear() {
+        self.container = nil
+        
         self.childDidFinish()
         self.navigateBack()
     }

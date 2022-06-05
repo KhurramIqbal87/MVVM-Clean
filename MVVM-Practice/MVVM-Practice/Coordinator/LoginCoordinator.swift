@@ -10,6 +10,10 @@ import UIKit
 
 
 final class LoginCoordinator: Coordinator{
+    func childDidFinish(coordinator: Coordinator) {
+        
+    }
+    
     
     private weak var parentCoordinator: Coordinator?
     private weak var navigationController: UINavigationController?

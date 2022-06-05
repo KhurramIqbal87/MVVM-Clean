@@ -1,5 +1,5 @@
 //
-//  MovieListViewController.swift
+//  MovieDetailViewController.swift
 //  MVVM-Practice
 //
 //  Created by Khurram Iqbal on 24/01/2022.
@@ -23,6 +23,7 @@ class MovieDetailViewController: UIViewController{
         fatalError("Init(coder:) not implemented")
     }
     init(movieDetailViewModel: MovieDetailViewModelType){
+        
         self.movieDetailViewModel = movieDetailViewModel
         super.init(nibName: "\(MovieDetailViewController.self)", bundle: nil)
     }
@@ -35,13 +36,16 @@ class MovieDetailViewController: UIViewController{
     }
     private func setupViewModel(){
         self.movieDetailViewModel.viewDidLoad()
-        self.movieDetailViewModel.didLoad = self.viewModelDidLoad
+        self.movieDetailViewModel.didLoad = { [weak self] in
+            self?.viewModelDidload()
+            
+        }
     }
     
-    
-    func viewModelDidLoad(){
-     
+    private func viewModelDidload(){
+        
     }
+
 }
 
 extension MovieDetailViewController: StoryboardInstantiate{

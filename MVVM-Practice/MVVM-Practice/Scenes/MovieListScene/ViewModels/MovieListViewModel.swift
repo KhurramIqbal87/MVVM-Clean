@@ -12,7 +12,7 @@ class MovieListViewModel: MovieListViewModelType{
     var totalPage: Int = 0
     
     var items: [MovieItemListViewModelType] = []
-    weak  var movieListNavigationDelegate: MovieListNavigationEvents?
+    weak  var delegate: MovieListNavigationEvents?
     var pages: [MoviePage] = []
     private var repository: MovieListImageRepositoryType?
     var didLoad: (([MovieItemListViewModelType]?, _ indexPath: [IndexPath]?) -> Void? )?
@@ -37,9 +37,7 @@ class MovieListViewModel: MovieListViewModelType{
             return page.movies
         }
         let movie =  movies[indexPath.row]
-        self.movieListNavigationDelegate?.navigateToDetail(movie: movie)
-        
-        
+        self.delegate?.navigateToDetail(movie: movie)
     }
     
     func getItemsForNextPage() {
