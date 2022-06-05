@@ -7,14 +7,13 @@
 
 import Foundation
 import UIKit
-class MovieDetailViewController: UIViewController{
+final class MovieDetailViewController: UIViewController{
    
-    private var movieDetailViewModel: MovieDetailViewModelType
+    private let movieDetailViewModel: MovieDetailViewModelType
   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViewModel()
-        self.movieDetailViewModel.delegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -23,10 +22,11 @@ class MovieDetailViewController: UIViewController{
     required init?(coder: NSCoder) {
         fatalError("Init(coder:) not implemented")
     }
-    init(movieDetailViewModel: MovieDetailViewModelType){
+    init(movieDetailViewModel: inout MovieDetailViewModelType){
         
         self.movieDetailViewModel = movieDetailViewModel
         super.init(nibName: "\(MovieDetailViewController.self)", bundle: nil)
+        movieDetailViewModel.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

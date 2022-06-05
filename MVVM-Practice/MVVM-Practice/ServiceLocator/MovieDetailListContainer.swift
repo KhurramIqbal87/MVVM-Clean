@@ -19,12 +19,12 @@ class MovieDetailListContainer{
         self.makeMovieDetailViewModel( movie: movie)
         
         
-        guard let moviedDetailVM = self.getMovieDetailViewModelProtocol() else {
+        guard var moviedDetailVM = self.getMovieDetailViewModelProtocol() else {
             return UIViewController()
         }
         
         
-        let viewController = MovieDetailViewController.init(movieDetailViewModel: moviedDetailVM)
+        let viewController = MovieDetailViewController.init(movieDetailViewModel: &moviedDetailVM)
         if let vm = moviedDetailVM as? MovieDetailViewModel{
             vm.naviagtionEventDelegate = self
         }

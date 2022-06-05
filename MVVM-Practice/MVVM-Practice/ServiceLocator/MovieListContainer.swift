@@ -24,11 +24,11 @@ class MovieListContainer{
         self.makeMovieListViewModel()
         
        
-        guard let viewModel = self.getMovieListViewModelProtocol()else{
+        guard var viewModel = self.getMovieListViewModelProtocol()else{
             
             return UIViewController()
         }
-        let viewController = MovieListViewController.init(movieListViewModel: viewModel)
+        let viewController = MovieListViewController.init(movieListViewModel: &viewModel)
         if let viewModel = viewModel as? MovieListViewModel{
             viewModel.navgationDelegate = self
         }
