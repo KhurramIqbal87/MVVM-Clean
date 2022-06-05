@@ -24,7 +24,6 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
     var overview: String = ""
     var imagePath: String = ""
     var title: String = ""
-    var didLoad: (() -> Void)?
     var id: Int = 0
   
 
@@ -103,7 +102,7 @@ extension MovieDetailViewModel{
         self.repository.getMovieCredits(movieID: self.id, completion: { [weak self] movieCredit in
             guard let credit = movieCredit else{return}
             self?.setCredits(credit: credit)
-            self?.didLoad?()
+            self?.delegate?.updateUI()
         })
     }
     

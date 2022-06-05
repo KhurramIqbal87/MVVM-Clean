@@ -32,10 +32,12 @@ final class MovieDetailViewController: UIViewController{
         super.viewWillAppear(animated)
         self.movieDetailViewModel.viewWillAppear()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.movieDetailViewModel.viewWillDisappear()
     }
+   
     private func setupViewModel(){
         self.movieDetailViewModel.viewDidLoad()
     
