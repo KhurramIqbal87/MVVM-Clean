@@ -20,41 +20,28 @@ final class MovieListViewController: UIViewController{
     }
     init(movieListViewModel: MovieListViewModelType){
         self.movieListViewModel = movieListViewModel
+        
         super.init(nibName: "\(MovieListViewController.self)", bundle: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.movieListViewModel.viewDidLoad()
-        self.movieListViewModel.didLoad = self.itemsDidLoad(items:indexPath:)
+        self.movieListViewModel.delegate = self
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = self.movieListViewModel.getTitle()
+        self.movieListViewModel.viewWillAppear()
+        
     }
     
-    func itemsDidLoad(items: [MovieItemListViewModelType]?, indexPath: [IndexPath]?){
-        guard let items = items , let indexPath = indexPath, items.count > 0 else{return}
-        
-        if  indexPath[0].row == 0{
-            DispatchQueue.main.async {
-                
-                let nib = UINib(nibName: items[0].cellReusableIdentifier, bundle: nil)
-                self.tableView.register(nib, forCellReuseIdentifier: items[0].cellReusableIdentifier)
-                self.tableView.reloadData()
-                
-            }
-            return
-        }
-        DispatchQueue.main.async {
-            self.tableView.insertRows(at: indexPath, with: .none)
-        }
-    }
+    
 }
 
 extension MovieListViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.movieListViewModel.items.count ?? 0
+        self.movieListViewModel.items.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (self.view.frame.width * 0.377 ) + 55
@@ -62,12 +49,14 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
          let viewModel = self.movieListViewModel.items[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellReusableIdentifier), let cellType = cell as? MovieItemTableViewCellProtocol else{ return UITableViewCell()}
+        let cell = self.getDequeCell(indexPath: indexPath)
+        guard let cellType = cell as? MovieItemTableViewCellProtocol else{return cell}
  
         cellType.cofigure(viewModel: viewModel)
         return cell
        
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movieListViewModel.didSelectMovieItem(indexPath: indexPath)
     }
@@ -75,9 +64,38 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate{
         
         self.movieListViewModel.willScrollToIndexPath(index: indexPath.row)
     }
+    
+    func getDequeCell(indexPath: IndexPath)->UITableViewCell{
+        let viewModel = self.movieListViewModel.items[indexPath.row]
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellReusableIdentifier), let _ = cell as? MovieItemTableViewCellProtocol {
+            return cell
+        }
+        
+        let nib = UINib.init(nibName: viewModel.cellReusableIdentifier, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: viewModel.cellReusableIdentifier)
+       
+        if let cell =   tableView.dequeueReusableCell(withIdentifier: viewModel.cellReusableIdentifier),let _ = cell as? MovieItemTableViewCellProtocol  {
+            return cell
+        }
+      
+        return UITableViewCell()
+    }
 }
 
 extension MovieListViewController: StoryboardInstantiate{
     static var defaultStoryboardName: String = "MovieList"
 }
 
+extension MovieListViewController: MovieListViewModelOutput{
+    func getTitle(title: String) {
+        self.title = title
+    }
+    func didLoadItems(items: [MovieItemListViewModelType]) {
+        
+       
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+}

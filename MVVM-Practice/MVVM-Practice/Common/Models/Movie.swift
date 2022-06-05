@@ -10,11 +10,11 @@ import Foundation
 struct Movie: Decodable{
     var id: UInt32
     var title: String
-    var poster_path: String
+    var poster_path: String?
     var genre_ids: [Int]
     var vote_average: Double
     var popularity: Double
-    var release_date: String
+    var release_date: String?
     var overview: String
    
     enum CodingKeys: String,CodingKey{

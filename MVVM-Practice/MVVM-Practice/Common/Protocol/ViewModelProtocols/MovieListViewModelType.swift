@@ -6,6 +6,13 @@
 //
 
 import Foundation
+protocol MovieListViewModelOutput: AnyObject{
+    
+    func didLoadItems(items: [MovieItemListViewModelType])
+    func getTitle(title: String)
+    
+}
+
 protocol MovieListViewModelType: ViewLifeCycle{
     //MARK: - MovieListViewModelInput
     func didSelectMovieItem(indexPath: IndexPath)
@@ -13,10 +20,10 @@ protocol MovieListViewModelType: ViewLifeCycle{
     func willScrollToIndexPath(index: Int)
     
     //MARK: - MovieListViewModelOutput
-    var didLoad : ((_ items: [MovieItemListViewModelType]?, _ indexPath: [IndexPath]?)->Void?)? {get set}
-    var currentPage: Int{get}
-    var totalPage: Int {get}
+//    var didLoad : ((_ items: [MovieItemListViewModelType]?, _ indexPath: [IndexPath]?)->Void?)? {get set}
+    
     var items: [MovieItemListViewModelType]{get}
     var pages: [MoviePage]{get}
-    func getTitle()->String
+    var delegate: MovieListViewModelOutput? { get set }
+    
 }

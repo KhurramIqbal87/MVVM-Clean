@@ -9,4 +9,5 @@ import Foundation
 protocol ViewLifeCycle{
     func viewDidLoad()
     func viewWillDisappear()
+    func viewWillAppear()
 }

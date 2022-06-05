@@ -8,26 +8,35 @@
 import Foundation
 
 class MovieListViewModel: MovieListViewModelType{
-    var currentPage: Int = 1
-    var totalPage: Int = 0
+    
+    private(set) var currentPage: Int = 1
+    private(set) var totalPage: Int = 0
     
     var items: [MovieItemListViewModelType] = []
-    weak  var delegate: MovieListNavigationEvents?
+   
     var pages: [MoviePage] = []
-    private var repository: MovieListImageRepositoryType?
-    var didLoad: (([MovieItemListViewModelType]?, _ indexPath: [IndexPath]?) -> Void? )?
+    private let repository: MovieListImageRepositoryType
+ 
+    
+    weak  var navgationDelegate: MovieListNavigationEvents?
+    weak var delegate: MovieListViewModelOutput?
+    
+    private init(){
+        fatalError("Init() not implemented")
+    }
 //    MARK: ViewModel Setup
     init( repository: MovieListImageRepositoryType ){
         self.repository = repository
     }
-    
     
     //MARK: - View Life Cycle
     func viewDidLoad() {
         self.getItemsForNextPage()
     }
     
-   
+    func viewWillAppear() {
+        self.delegate?.getTitle(title: "Movies")
+    }
     func viewWillDisappear() {
       
     }
@@ -37,20 +46,19 @@ class MovieListViewModel: MovieListViewModelType{
             return page.movies
         }
         let movie =  movies[indexPath.row]
-        self.delegate?.navigateToDetail(movie: movie)
+        self.navgationDelegate?.navigateToDetail(movie: movie)
     }
     
     func getItemsForNextPage() {
-        self.repository?.getMovies(forIndex: self.currentPage, completion: { [weak self]  moviePage in
+        self.repository.getMovies(forIndex: self.currentPage, completion: { [weak self]  moviePage in
             guard let self = self , let moviePage = moviePage else {return}
             self.pages.append(moviePage)
+            self.totalPage = moviePage.totalPage
             self.makeViewModels(movies: moviePage.movies)
            
         })
     }
-    func getTitle() -> String {
-        return "Movies"
-    }
+    
     private func makeViewModels(movies: [Movie]){
         let movieViewModels = MovieItemListViewModel.convertModelsToViewModels(movies: movies)
         var indexPaths: [IndexPath] = []
@@ -61,7 +69,8 @@ class MovieListViewModel: MovieListViewModelType{
             count += 1
         }
         self.updateStates(movieViewModels: movieViewModels)
-        self.didLoad?(movieViewModels, indexPaths)
+//        self.didLoad?(movieViewModels, indexPaths)
+        self.delegate?.didLoadItems(items: movieViewModels)
         
     }
     private func updateStates(movieViewModels: [MovieItemListViewModel]){
@@ -69,7 +78,7 @@ class MovieListViewModel: MovieListViewModelType{
         self.currentPage += 1
     }
     func willScrollToIndexPath(index: Int) {
-        if self.items.count  - 1 ==  index {
+        if self.items.count  - 1 ==  index && currentPage < self.totalPage{
             self.getItemsForNextPage()
         }
     }

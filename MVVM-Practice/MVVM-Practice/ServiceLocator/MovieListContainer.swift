@@ -30,7 +30,7 @@ class MovieListContainer{
         }
         let viewController = MovieListViewController.init(movieListViewModel: viewModel)
         if let viewModel = viewModel as? MovieListViewModel{
-            viewModel.delegate = self
+            viewModel.navgationDelegate = self
         }
         return viewController
     }

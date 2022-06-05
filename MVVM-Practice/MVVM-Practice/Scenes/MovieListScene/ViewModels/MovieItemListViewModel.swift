@@ -33,6 +33,7 @@ class MovieItemListViewModel: MovieItemListViewModelType{
             completion(data)
             return
         }
+        if self.posterImage.isEmpty{return}
         self.getImage(relativePath: self.posterImage, width: width) { [weak self] imageData in
             self?.imageData = imageData
             completion(imageData)
@@ -46,8 +47,8 @@ extension MovieItemListViewModel{
         return movies.compactMap { movie in
             let itemListViewModel = MovieItemListViewModel()
             itemListViewModel.genreNames = []
-            itemListViewModel.releaseDate = movie.release_date
-            itemListViewModel.posterImage = movie.poster_path
+            itemListViewModel.releaseDate = movie.release_date ?? ""
+            itemListViewModel.posterImage = movie.poster_path ?? ""
             itemListViewModel.title = movie.title
             itemListViewModel.rating = movie.vote_average
             return itemListViewModel

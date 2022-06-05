@@ -12,8 +12,9 @@ protocol MovieDetailNavigationEvents: AnyObject{
     func viewWillDisappear()
 }
 final class MovieDetailViewModel: MovieDetailViewModelType{
+    weak var delegate: MovieDetailViewModelOutput?
     
-    weak var delegate: MovieDetailNavigationEvents?
+    weak var naviagtionEventDelegate: MovieDetailNavigationEvents?
     private var cast: [MovieCastViewModel] = []
     
     private var crew: [MovieCrewViewModel] = []
@@ -34,8 +35,8 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
         
         self.repository =  repository
         self.title = movie.title
-        self.releaseDate = movie.release_date
-        self.imagePath = movie.poster_path
+        self.releaseDate = movie.release_date ?? ""
+        self.imagePath = movie.poster_path ?? ""
         self.overview = movie.overview
         self.id = Int(movie.id)
         self.genres = movie.genre_ids.compactMap({ id in
@@ -50,6 +51,13 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
             self?.getMovieCredits()
         }
     }
+    func viewWillAppear() {
+        self.delegate?.getTitle(title: self.title)
+    }
+    func viewWillDisappear() {
+        self.naviagtionEventDelegate?.viewWillDisappear()
+        
+    }
     private func setGenre(genre: [Genre]){
        let genres = genre.compactMap({ genreMap in
             return GenreViewModel.init(genre: genreMap)
@@ -63,10 +71,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
         print(self.genres.count)
     }
     
-    func viewWillDisappear() {
-        self.delegate?.viewWillDisappear()
-        
-    }
+    
    //MARK: - Protocol Functions
     func getImage(imagePath: String, compeletion: @escaping ((Data) -> Void)) {
         self.repository.getImage(relativePath: imagePath, width: 400, completion: { imageData in
@@ -78,7 +83,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
         })
     }
     func navigateBack() {
-        self.delegate?.viewWillDisappear()
+        self.naviagtionEventDelegate?.viewWillDisappear()
     }
     func getCrew() -> [MovieCrewViewModelProtocol] {
         return self.crew
@@ -125,8 +130,8 @@ extension MovieDetailViewModel{
         
         let movieDetailViewModel = MovieDetailViewModel( repository: repository, movie: movie)
         movieDetailViewModel.genres = []
-        movieDetailViewModel.releaseDate = movie.release_date
-        movieDetailViewModel.imagePath = movie.poster_path
+        movieDetailViewModel.releaseDate = movie.release_date ?? ""
+        movieDetailViewModel.imagePath = movie.poster_path ?? ""
         movieDetailViewModel.overview = movie.overview
         movieDetailViewModel.title = movie.title
         movieDetailViewModel.id = Int(movie.id)

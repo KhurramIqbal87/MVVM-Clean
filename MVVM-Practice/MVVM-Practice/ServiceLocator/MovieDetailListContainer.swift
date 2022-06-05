@@ -26,7 +26,7 @@ class MovieDetailListContainer{
         
         let viewController = MovieDetailViewController.init(movieDetailViewModel: moviedDetailVM)
         if let vm = moviedDetailVM as? MovieDetailViewModel{
-            vm.delegate = self
+            vm.naviagtionEventDelegate = self
         }
         return viewController
         

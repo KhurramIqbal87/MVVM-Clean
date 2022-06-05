@@ -14,6 +14,7 @@ class MovieDetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViewModel()
+        self.movieDetailViewModel.delegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -28,7 +29,8 @@ class MovieDetailViewController: UIViewController{
         super.init(nibName: "\(MovieDetailViewController.self)", bundle: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.title = self.movieDetailViewModel.title
+        super.viewWillAppear(animated)
+        self.movieDetailViewModel.viewWillAppear()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -36,10 +38,7 @@ class MovieDetailViewController: UIViewController{
     }
     private func setupViewModel(){
         self.movieDetailViewModel.viewDidLoad()
-        self.movieDetailViewModel.didLoad = { [weak self] in
-            self?.viewModelDidload()
-            
-        }
+    
     }
     
     private func viewModelDidload(){
@@ -53,5 +52,13 @@ extension MovieDetailViewController: StoryboardInstantiate{
     static var defaultStoryboardName: String = "MovieDetail"
 }
 
+extension MovieDetailViewController : MovieDetailViewModelOutput{
+    func getTitle(title: String) {
+        self.title = title
+    }
+    func updateUI() {
+        self.viewModelDidload()
+    }
+}
 
 
