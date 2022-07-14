@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieCrewViewModel: MovieCrewViewModelProtocol{
+class MovieCrewViewModel: MovieCrewViewModelType{
   
     
     private var name: String = ""

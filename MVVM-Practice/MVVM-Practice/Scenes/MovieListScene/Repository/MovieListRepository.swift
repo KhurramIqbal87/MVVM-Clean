@@ -8,6 +8,8 @@
 import Foundation
 class MovieListRepository: MovieListImageRepositoryType{
     
+    
+    
     private let networkSharedInstance = NetworkManager.sharedInstance
    
     private var networkManager: NetworkProtocol
@@ -16,16 +18,13 @@ class MovieListRepository: MovieListImageRepositoryType{
     }
     
     
-    func getMovies(forIndex: Int = 0, completion: @escaping (MoviePage?) -> Void) {
+    func getMovies(forIndex: Int = 0, completion: @escaping (MoviePage?, NetworkError?) -> Void) {
         
         let movieUrl = MovieConstants.getMovieDiscoverURl(forIndex: forIndex)
-        
+       
         networkManager.makeHTTPRequest(httpMethod: .GET, endPoint: movieUrl, parameters: nil) { (success, error: NetworkError?, moviePage: MoviePage?) in
-            
-            if success{
-                completion(moviePage)
-            }
-            
+
+            completion(moviePage, error)
         }
     }
     

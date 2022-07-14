@@ -85,14 +85,19 @@ final class NetworkManager: NetworkProtocol{
                     } catch let DecodingError.keyNotFound(key, context) {
                         print("Key '\(key)' not found:", context.debugDescription)
                         print("codingPath:", context.codingPath)
+                        completion(false, NetworkError.dataSerializationError(error: context.debugDescription), nil)
                     } catch let DecodingError.valueNotFound(value, context) {
                         print("Value '\(value)' not found:", context.debugDescription)
                         print("codingPath:", context.codingPath)
+                        completion(false, NetworkError.dataSerializationError(error: context.debugDescription), nil)
                     } catch let DecodingError.typeMismatch(type, context)  {
                         print("Type '\(type)' mismatch:", context.debugDescription)
                         print("codingPath:", context.codingPath)
+                        completion(false, NetworkError.dataSerializationError(error: context.debugDescription), nil)
+                        
                     } catch {
                         print("error: ", error)
+                        completion(false,NetworkError.error(error: error), nil)
                     }
                 }
             }.resume()

@@ -84,12 +84,12 @@ final class MovieDetailViewModel: MovieDetailViewModelType{
     func navigateBack() {
         self.naviagtionEventDelegate?.viewWillDisappear()
     }
-    func getCrew() -> [MovieCrewViewModelProtocol] {
+    func getCrew() -> [MovieCrewViewModelType] {
         return self.crew
     }
     
     
-    func getCast() -> [MoiveCastViewModelProtocol] {
+    func getCast() -> [MoiveCastViewModelType] {
         return self.cast
     }
     func getGenre() -> [GenreViewModelProtocol] {

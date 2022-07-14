@@ -56,12 +56,8 @@ public class DefaultLoginViewModel: LoginViewModelProtocol {
                     self.didFinishLogin?.error("unKnown error")
                     return
                 }
-                
-                switch errorType{
-                case .networkError (let statusCode):
-                    self.didFinishLogin?.error(self.showNetworkError(statusCode: statusCode))
-                case .noInternet: self.didFinishLogin?.error("No Internet Connection")
-                }
+                self.didFinishLogin?.error(errorType.getErrorMessage())
+               
             }
             
         })
