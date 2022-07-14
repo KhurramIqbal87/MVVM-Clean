@@ -23,8 +23,8 @@ protocol MovieDetailViewModelOutput: AnyObject{
      var delegate: MovieDetailViewModelOutput? { get set }
      
      func navigateBack()
-     func getCrew()->[MovieCrewViewModelProtocol]
-     func getCast()->[MoiveCastViewModelProtocol]
+     func getCrew()->[MovieCrewViewModelType]
+     func getCast()->[MoiveCastViewModelType]
      func getGenre()->[GenreViewModelProtocol]
     
      func getImage(imagePath: String, compeletion: @escaping ((_ image: Data) -> Void))

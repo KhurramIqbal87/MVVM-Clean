@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol MovieCrewViewModelProtocol: PosterImageRepositoryType{
+protocol MovieCrewViewModelType: PosterImageRepositoryType{
     func getName()->String
     func getImage(completion: @escaping((_ imageData: Data?)->Void))
     func getDepartment()->String

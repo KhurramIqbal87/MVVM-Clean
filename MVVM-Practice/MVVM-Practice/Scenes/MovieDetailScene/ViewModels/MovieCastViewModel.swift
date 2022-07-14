@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieCastViewModel: MoiveCastViewModelProtocol{
+class MovieCastViewModel: MoiveCastViewModelType{
   
     
     private var name: String = ""

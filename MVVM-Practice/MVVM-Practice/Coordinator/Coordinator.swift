@@ -8,7 +8,6 @@
 import UIKit
 
 protocol Coordinator: AnyObject{
-    var childCordinators: [Coordinator]{get}
     func start()
     func childDidFinish(coordinator: Coordinator)
     

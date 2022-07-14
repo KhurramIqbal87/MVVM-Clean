@@ -24,6 +24,7 @@ final class MovieListViewController: UIViewController{
         
         super.init(nibName: "\(MovieListViewController.self)", bundle: nil)
         movieListViewModel.delegate = self
+        movieListViewModel.networkCallStates = self
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,5 +100,17 @@ extension MovieListViewController: MovieListViewModelOutput{
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+    func showError(message: String) {
+        self.showError(title: "Error", message: message)
+    }
+}
+extension MovieListViewController: NetworkCallStates{
+    func didStartLoading() {
+        
+        self.showLoader()
+    }
+    func didFinishLoading() {
+        self.hideLoader()
     }
 }
